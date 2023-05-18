@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :study_times, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
