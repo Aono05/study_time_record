@@ -25,9 +25,9 @@
         <td><%= l(study_time.start_time) %></td>
         <td><%= l(study_time.end_time) %></td>
         <td><%= study_time.duration %></td>
-        <td><%= link_to 'Show', "#" %></td>
-        <td><%= link_to 'Edit', "#" %></td>
-        <td><%= link_to 'Destroy', "#" %></td>
+        <td><%= link_to 'Show', study_time %></td>
+        <td><%= link_to 'Edit', edit_study_time_path(study_time) %></td>
+        <td><%= link_to 'Destroy', study_time, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
