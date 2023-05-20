@@ -1,5 +1,6 @@
 class StudyTimesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_study_time, only: [:show, :edit, :update, :destroy]
 
   def index
     @study_times = current_user.study_times
@@ -38,9 +39,19 @@ class StudyTimesController < ApplicationController
     end
   end
 
+  def destroy
+    @study_time.destroy
+    redirect_to study_times_path, notice: '勉強時間を削除しました'
+  end
+
+
   private
 
   def study_time_params
     params.require(:study_time).permit(:start_time, :end_time)
+  end
+
+  def set_study_time
+    @study_time = current_user.study_times.find_by(id: params[:id])
   end
 end
