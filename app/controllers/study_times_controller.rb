@@ -20,6 +20,23 @@ class StudyTimesController < ApplicationController
     end
   end
 
+  def show
+    @study_time = StudyTime.find(params[:id])
+  end
+
+  def edit
+    @study_time = StudyTime.find(params[:id])
+  end
+
+  def update
+    @study_time = StudyTime.find(params[:id])
+
+    if @study_time.update(study_time_params)
+      redirect_to @study_time
+    else
+      render 'edit'
+    end
+  end
 
   private
 
