@@ -48,7 +48,7 @@ class StudyTimesController < ApplicationController
   private
 
   def study_time_params
-    params.require(:study_time).permit(:start_time, :end_time)
+    params.require(:study_time).permit(:started_at, :ended_at)
   end
 
   def set_study_time

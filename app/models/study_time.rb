@@ -2,6 +2,6 @@ class StudyTime < ApplicationRecord
   belongs_to :user
 
   def duration
-    (end_time - start_time) / 60
+    (ended_at - started_at) / 60
   end
 end
