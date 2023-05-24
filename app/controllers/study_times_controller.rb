@@ -11,8 +11,9 @@ class StudyTimesController < ApplicationController
   end
 
   def create
-    @study_time = StudyTime.new(study_time_params)
-    @study_time.user = current_user
+    @study_time = StudyTime.new(study_time_params).tap do |study_time|
+      study_time.user = current_user
+    end
 
     if @study_time.save
       redirect_to @study_time
