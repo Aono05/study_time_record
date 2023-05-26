@@ -11,9 +11,7 @@ class StudyTimesController < ApplicationController
   end
 
   def create
-    @study_time = StudyTime.new(study_time_params).tap do |study_time|
-      study_time.user = current_user
-    end
+    @study_time = current_user.study_times.build(study_time_params)
 
     if @study_time.save
       redirect_to @study_time
@@ -22,21 +20,28 @@ class StudyTimesController < ApplicationController
     end
   end
 
+
   def show
-    @study_time = StudyTime.find(params[:id])
+    if @study_time.present?
+      render :show
+    else
+      redirect_to study_times_path, notice: '指定された勉強時間が見つかりません'
+    end
   end
 
+
   def edit
-    @study_time = StudyTime.find(params[:id])
   end
 
   def update
-    @study_time = StudyTime.find(params[:id])
-
-    if @study_time.update(study_time_params)
-      redirect_to @study_time
-    else
-      render 'edit'
+    begin
+      if @study_time.update(study_time_params)
+        redirect_to @study_time
+      else
+        render 'edit'
+      end
+    rescue StandardError => e
+      redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
     end
   end
 
