@@ -34,19 +34,17 @@ class StudyTimesController < ApplicationController
   end
 
   def update
-    begin
-      if @study_time.update(study_time_params)
-        redirect_to @study_time
-      else
-        render 'edit'
-      end
-    rescue StandardError => e
-      redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
+    if @study_time.update!(study_time_params)
+      redirect_to @study_time
+    else
+      render 'edit'
     end
+  rescue StandardError => e
+    redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
   end
 
   def destroy
-    @study_time.destroy
+    @study_time&.destroy
     redirect_to study_times_path, notice: '勉強時間を削除しました'
   end
 
