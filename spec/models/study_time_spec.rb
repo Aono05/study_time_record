@@ -11,4 +11,3 @@ RSpec.describe StudyTime, type: :model do
     end
   end
 end
-
