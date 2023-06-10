@@ -1,0 +1,31 @@
+<h1>勉強時間の編集</h1>
+
+<%= form_with(model: @study_time, local: true) do |form| %>
+  <% if @study_time.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@study_time.errors.count, "error") %> が発生しました。</h2>
+
+      <ul>
+        <% @study_time.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :started_at %>：
+    <%= form.datetime_local_field :started_at %>
+  </div>
+
+  <div>
+    <%= form.label :ended_at %>：
+    <%= form.datetime_local_field :ended_at %>
+  </div>
+
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', study_times_path %>

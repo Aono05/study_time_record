@@ -1,0 +1,10 @@
+<h1>勉強時間の詳細情報</h1>
+
+<p>Start time：<%= l(@study_time.started_at) %></p>
+<p>End time：<%= l(@study_time.ended_at) %></p>
+<p>Duration：<%= @study_time.duration %></p>
+
+<br>
+
+<%= link_to '編集', edit_study_time_path(@study_time) %> |
+<%= link_to '一覧に戻る', study_times_path %>
