@@ -44,6 +44,8 @@ gem 'pry-rails'
 
 gem 'chartkick'
 
+gem "net-http"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
