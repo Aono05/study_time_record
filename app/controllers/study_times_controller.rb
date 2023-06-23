@@ -4,7 +4,7 @@ class StudyTimesController < ApplicationController
 
   def index
     @chart_data = StudyTime.total_duration_per_day(current_user)
-    @study_times = current_user.study_times.order(created_at: :desc)
+    @study_times = current_user.study_times.order(started_at: :asc)
   end
 
   def new
