@@ -1,5 +1,11 @@
   <h1>新しい勉強時間の記録</h1>
 
+  <% if flash[:alert].present? %>
+    <div class="flash alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
   <%= form_with(model: @study_time, local: true) do |form| %>
     <% if @study_time.errors.any? %>
       <div id="error_explanation">

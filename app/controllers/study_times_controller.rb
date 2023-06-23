@@ -14,13 +14,18 @@ class StudyTimesController < ApplicationController
   def create
     @study_time = current_user.study_times.build(study_time_params)
 
-    if @study_time.save
+    if @study_time.started_at.nil?
+      flash.now[:alert] = '勉強開始時間を入力してください'
+      render 'new'
+    elsif @study_time.ended_at.nil?
+      flash.now[:alert] = '勉強終了時間を入力してください'
+      render 'new'
+    elsif @study_time.save
       redirect_to @study_time
     else
       render 'new'
     end
   end
-
 
   def show
     if @study_time.present?
@@ -29,7 +34,6 @@ class StudyTimesController < ApplicationController
       redirect_to study_times_path, notice: '指定された勉強時間が見つかりません'
     end
   end
-
 
   def edit
   end
@@ -43,6 +47,7 @@ class StudyTimesController < ApplicationController
   rescue StandardError => e
     redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
   end
+
 
   def destroy
     @study_time&.destroy
