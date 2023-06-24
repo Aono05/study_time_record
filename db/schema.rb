@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2023_05_18_114548) do
 
   create_table "study_times", force: :cascade do |t|
     t.datetime "started_at", null: false
-    t.datetime "ended_at"
+    t.datetime "ended_at", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

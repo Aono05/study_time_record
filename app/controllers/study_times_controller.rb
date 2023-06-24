@@ -14,13 +14,7 @@ class StudyTimesController < ApplicationController
   def create
     @study_time = current_user.study_times.build(study_time_params)
 
-    if @study_time.started_at.nil?
-      flash.now[:alert] = '勉強開始時間を入力してください'
-      render 'new'
-    elsif @study_time.ended_at.nil?
-      flash.now[:alert] = '勉強終了時間を入力してください'
-      render 'new'
-    elsif @study_time.save
+    if @study_time.save
       redirect_to @study_time
     else
       render 'new'
