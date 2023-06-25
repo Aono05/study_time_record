@@ -3,7 +3,7 @@
 <h4> メールアドレス： <%= current_user.email %> </h4>
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 
-<%= column_chart @chart_data, xtitle: "日付", ytitle: "勉強時間" %>
+<%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
 
 <table>
   <thead>

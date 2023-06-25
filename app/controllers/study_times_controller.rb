@@ -3,7 +3,7 @@ class StudyTimesController < ApplicationController
   before_action :set_study_time, only: [:show, :edit, :update, :destroy]
 
   def index
-    @chart_data = StudyTime.total_duration_per_day(current_user)
+    @total_study_time_indexed_by_date = StudyTime.total_duration_per_day(current_user)
     @study_times = current_user.study_times.order(started_at: :asc)
   end
 
