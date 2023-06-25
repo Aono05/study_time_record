@@ -3,7 +3,8 @@ class StudyTimesController < ApplicationController
   before_action :set_study_time, only: [:show, :edit, :update, :destroy]
 
   def index
-    @study_times = current_user.study_times
+    @total_study_time_indexed_by_date = StudyTime.total_duration_per_day(current_user)
+    @study_times = current_user.study_times.order(started_at: :asc)
   end
 
   def new
@@ -20,7 +21,6 @@ class StudyTimesController < ApplicationController
     end
   end
 
-
   def show
     if @study_time.present?
       render :show
@@ -28,7 +28,6 @@ class StudyTimesController < ApplicationController
       redirect_to study_times_path, notice: '指定された勉強時間が見つかりません'
     end
   end
-
 
   def edit
   end
@@ -42,6 +41,7 @@ class StudyTimesController < ApplicationController
   rescue StandardError => e
     redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
   end
+
 
   def destroy
     @study_time&.destroy
