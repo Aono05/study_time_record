@@ -15,6 +15,10 @@ class StudyTime < ApplicationRecord
       group("date(started_at)").where(user: user).sum(calcurate_duration)
     end
 
+    def total_duration_per_week_per_user
+      joins(:user).where("started_at >= ?", 1.week.ago).group("users.id").select("users.*, SUM(#{calcurate_duration}) AS total_duration").order("total_duration DESC")
+    end
+
     private
 
     def calcurate_duration
