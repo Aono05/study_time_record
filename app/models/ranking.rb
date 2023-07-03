@@ -1,17 +1,21 @@
 class Ranking < ApplicationRecord
-  belongs_to :user
+  class << self
+    def create_total_week_duration_per_user
+      total_study_time_per_user = StudyTime.total_duration_per_week_per_user
+      now = Time.current.to_i
+      total_study_time_per_user.each do |user_id, total_study_time|
+        user = User.find(user_id.id)
 
-  def set_duration
-    study_times = user.study_times
-    self.duration = study_times.sum(&:duration)
-    save
-  end
+        create(
+          user_id: user_id.id,
+          total_duration: total_study_time_per_user,
+          chunk_id: now
+        )
+      end
+    end
 
-  def self.total_duration_per_week_per_user
-    select("users.id, SUM(rankings.duration) AS total_duration")
-      .joins(:user)
-      .where("rankings.created_at >= ?", 1.week.ago)
-      .group("users.id")
-      .order("total_duration DESC")
+    def total_week_duration_latest
+      where(chunk_id: maximum(:chunk_id)).order(total_duration: :desc)
+    end
   end
 end
