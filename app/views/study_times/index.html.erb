@@ -34,23 +34,5 @@
 <%= link_to '勉強時間記録', new_study_time_path %>
 <br>
 
-<h2>週間勉強時間ランキング</h2>
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>User ID</th>
-      <th>1週間の合計勉強時間</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @total_study_time_per_user.each.with_index(1) do |user, index| %>
-      <tr>
-        <td><%= index %></td>
-        <td><%= user.id %></td>
-        <td><%= user.total_duration %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h3>週間勉強時間ランキング</h3>
+<%= link_to 'Rankings', rankings_path %>

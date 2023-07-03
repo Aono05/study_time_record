@@ -5,7 +5,6 @@ class StudyTimesController < ApplicationController
   def index
     @total_study_time_indexed_by_date = StudyTime.total_duration_per_day(current_user)
     @study_times = current_user.study_times.order(started_at: :asc)
-    @total_study_time_per_user = StudyTime.total_duration_per_week_per_user
   end
 
   def new
