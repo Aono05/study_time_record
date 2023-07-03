@@ -1,0 +1,22 @@
+<h2>週間勉強時間ランキング</h2>
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>User ID</th>
+      <th>1週間の合計勉強時間</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @total_week_study_time_ranking.each_with_index do |ranking, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= ranking.user_id %></td>
+        <td><%= ranking.total_duration %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '勉強時間一覧', study_times_index_path %>
