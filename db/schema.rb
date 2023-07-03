@@ -19,11 +19,10 @@ ActiveRecord::Schema.define(version: 2023_06_26_215136) do
   end
 
   create_table "rankings", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "duration", default: 0
+    t.integer "total_duration", default: 0
+    t.bigint "chunk_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_rankings_on_user_id"
   end
 
   create_table "study_times", force: :cascade do |t|

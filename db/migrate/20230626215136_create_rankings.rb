@@ -1,9 +1,8 @@
 class CreateRankings < ActiveRecord::Migration[5.2]
   def change
     create_table :rankings do |t|
-      t.references :user, foreign_key: true
-      t.integer :duration, default: 0
-
+      t.integer :total_duration, default: 0
+      t.bigint :chunk_id, null: false
       t.timestamps
     end
   end
