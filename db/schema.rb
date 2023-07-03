@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_215136) do
   end
 
   create_table "rankings", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.integer "total_duration", default: 0
     t.bigint "chunk_id", null: false
     t.datetime "created_at", null: false
