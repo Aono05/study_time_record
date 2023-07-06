@@ -1,16 +1,14 @@
 class Ranking < ApplicationRecord
+  belongs_to :user
+
   class << self
     def create_total_week_duration_per_user
-      total_study_time_per_user = StudyTime.total_duration_per_week_per_user
+      Ranking.delete_all
       now = Time.current.to_i
-      total_study_time_per_user.each do |user_id, total_study_time|
-        user = User.find(user_id.id)
 
-        create(
-          user_id: user_id.id,
-          total_duration: total_study_time_per_user,
-          chunk_id: now
-        )
+      User.all.each do |user|
+        total_duration = StudyTime.total_duration_per_week(user)
+        Ranking.create(user: user, total_duration: total_duration, chunk_id: now)
       end
     end
 
