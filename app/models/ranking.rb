@@ -6,10 +6,12 @@ class Ranking < ApplicationRecord
       Ranking.delete_all
       now = Time.current.to_i
 
-      User.all.each do |user|
+      rank_data = User.all.map do |user|
         total_duration = StudyTime.total_duration_per_week(user)
-        Ranking.create(user: user, total_duration: total_duration, chunk_id: now)
+        { user_id: user.id, total_duration: total_duration, chunk_id: now }
       end
+
+      Ranking.import(rank_data)
     end
 
     def total_week_duration_latest
