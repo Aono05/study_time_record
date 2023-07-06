@@ -12,16 +12,16 @@ class StudyTime < ApplicationRecord
 
   class << self
     def total_duration_per_day(user)
-      group("date(started_at)").where(user: user).sum(calcurate_duration)
+      group("date(started_at)").where(user: user).sum(calculate_duration)
     end
 
-    def total_duration_per_week_per_user
-      joins(:user).where("started_at >= ?", 1.week.ago).group("users.id").select("users.*, SUM(#{calcurate_duration}) AS total_duration").order("total_duration DESC")
+    def total_duration_per_week(user)
+      where(user: user, started_at: 1.week.ago..Time.current).sum(calculate_duration)
     end
 
     private
 
-    def calcurate_duration
+    def calculate_duration
       "(strftime('%s', ended_at) - strftime('%s', started_at)) / 60"
     end
   end
