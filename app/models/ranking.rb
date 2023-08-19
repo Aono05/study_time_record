@@ -28,7 +28,7 @@ class Ranking < ApplicationRecord
         }
       end
 
-      Ranking.import(rankings)
+      Ranking.import!(rankings)
     end
 
     def total_week_duration_latest
