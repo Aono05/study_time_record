@@ -2,14 +2,13 @@ class Ranking < ApplicationRecord
   belongs_to :user
 
   class << self
-    def create_total_week_duration_per_user
-      now = Time.current
-      chunk_id = now.to_i
+    def create_total_week_duration_per_user(started_at:, ended_at:)
+      chunk_id = aggregation_chunk_id(started_at)
 
       results = {}
       StudyTime.where_by_duration(
-        now.ago(1.week),
-        now
+        started_at,
+        ended_at
       ).find_each do |study_time|
         aggregated_total_duration = results[study_time.user_id]
 
@@ -28,11 +27,17 @@ class Ranking < ApplicationRecord
         }
       end
 
-      Ranking.import!(rankings)
+      import!(rankings)
     end
 
     def total_week_duration_latest
       where(chunk_id: maximum(:chunk_id)).order(total_duration: :desc)
+    end
+
+    private
+
+    def aggregation_chunk_id(aggregation_time)
+      aggregation_time.to_i
     end
   end
 end
