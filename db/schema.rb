@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_18_114548) do
+ActiveRecord::Schema.define(version: 2023_06_26_215136) do
 
   create_table "cheer_messages", force: :cascade do |t|
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "total_duration", null: false
+    t.bigint "chunk_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

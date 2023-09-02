@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'cheer_messages#index'
   get 'study_times/index', to: 'study_times#index'
   resources :study_times
+  resources :rankings
 end
