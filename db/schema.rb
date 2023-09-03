@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_26_215136) do
+ActiveRecord::Schema.define(version: 2023_09_02_220103) do
 
   create_table "cheer_messages", force: :cascade do |t|
     t.string "content"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2023_06_26_215136) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "memo"
   end
 
   create_table "users", force: :cascade do |t|
