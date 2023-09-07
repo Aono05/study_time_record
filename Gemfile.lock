@@ -124,6 +124,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.3-arm64-darwin)
       racc (~> 1.4)
+    obscenity (1.0.2)
     orm_adapter (0.5.0)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -258,6 +259,7 @@ DEPENDENCIES
   email_validator
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  obscenity
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.8, >= 5.2.8.1)
