@@ -1,7 +1,9 @@
 class StudyTime < ApplicationRecord
+  NGWORD_REGEX = /(.)\1{4,}/.freeze
   belongs_to :user
   validates :started_at, presence: true
   validates :ended_at, presence: true
+  validates :memo, format: { without: NGWORD_REGEX, message: 'は5文字以上の繰り返しは禁止です' }
 
   def duration
     return 0 if ended_at.nil?
