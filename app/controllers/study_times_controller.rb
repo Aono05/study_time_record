@@ -13,7 +13,6 @@ class StudyTimesController < ApplicationController
 
   def create
     @study_time = current_user.study_times.build(study_time_params)
-    @study_time.memo = params[:study_time][:memo]
 
     if @study_time.save
       redirect_to @study_time
@@ -34,7 +33,7 @@ class StudyTimesController < ApplicationController
   end
 
   def update
-    if @study_time.update(study_time_params.merge(memo: params[:study_time][:memo]))
+    if @study_time.update!(study_time_params)
       redirect_to @study_time
     else
       render 'edit'
