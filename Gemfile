@@ -73,5 +73,3 @@ gem 'chartkick'
 gem 'activerecord-import'
 
 gem 'whenever', require: false
-
-gem 'obscenity'
