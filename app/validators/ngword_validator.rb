@@ -1,15 +1,22 @@
 class NgwordValidator < ActiveModel::EachValidator
-  NGWORD_REGEX = /(.)\1{4,}/.freeze
-
   def validate_each(record, attribute, value)
-    return value.blank?
+    return if value.blank?
 
-    if value.match?(NGWORD_REGEX)
-      record.errors.add(attribute, 'に5文字以上の繰り返し文字が含まれています。')
-    end
+    return unless ng_word_regex.match?(value)
 
-    if Obscenity.profane?(value)
-      record.errors.add(attribute, 'にNGワードが含まれています。')
-    end
+    record.errors.add(attribute, 'にNGワードが含まれています。')
+  end
+
+  private
+
+  def ng_word_regex
+    @ng_word_regex ||= create_ng_word_regex
+  end
+
+  def create_ng_word_regex
+    yaml_file_path = Rails.root.join('config/blacklist.yml')
+    ng_words = YAML.load_file(yaml_file_path)
+    ng_pattern = ng_words.join('|')
+    Regexp.new(ng_pattern)
   end
 end
