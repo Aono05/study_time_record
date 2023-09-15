@@ -4,8 +4,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true
-  validates :password, presence: true
+  validates :password, presence: true, on: :update, allow_blank: true
   validate :password_complexity
+  validates :introduction, length: { maximum: 200 }
 
   def password_complexity
     return if password.blank? || password =~ /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,64}$/
