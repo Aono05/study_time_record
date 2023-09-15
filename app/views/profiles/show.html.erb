@@ -1,0 +1,21 @@
+<%= link_to '編集', edit_profile_path, class: 'btn btn-success float-right' %>
+  <table class="table">
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
+      <td><%= current_user.email %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:"名前")) %></th>
+      <td><%= current_user.name %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:"プロフィール")) %></th>
+      <td><%= current_user.introduction %></td>
+    </tr>
+    <tr>
+      <th scope="row">合計勉強時間</th>
+      <td><%= current_user.study_times.total_duration_for_user(current_user) %> 分</td>
+    </tr>
+  </table>
+
+<%= link_to '一覧に戻る', study_times_path %>
