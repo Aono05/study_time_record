@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     if @user.update!(user_params)
       redirect_to profile_path, success: "プロフィールを更新しました"
     else
-      flash.now[:danger] = "プロフィールを更新できませんでした"
+      set_alert("プロフィールを更新できませんでした")
       render :edit
     end
   rescue StandardError => e
