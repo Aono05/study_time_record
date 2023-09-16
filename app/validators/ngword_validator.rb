@@ -1,22 +1,19 @@
 class NgwordValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    return if value.blank?
-
-    return unless ng_word_regex.match?(value)
+  def validate_each(record, attribute, text)
+    return if text.blank?
+    return unless ng_word_regexp.match?(text)
 
     record.errors.add(attribute, 'にNGワードが含まれています。')
   end
 
   private
 
-  def ng_word_regex
-    @ng_word_regex ||= create_ng_word_regex
+  def ng_word_regexp
+    @ng_word_regexp ||= Regexp.new(ng_pattern)
   end
 
-  def create_ng_word_regex
+  def ng_pattern
     yaml_file_path = Rails.root.join('config/blacklist.yml')
-    ng_words = YAML.load_file(yaml_file_path)
-    ng_pattern = ng_words.join('|')
-    Regexp.new(ng_pattern)
+    YAML.load_file(yaml_file_path).join('|')
   end
 end

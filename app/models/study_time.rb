@@ -12,6 +12,10 @@ class StudyTime < ApplicationRecord
   end
 
   class << self
+    def total_duration_for_user(user)
+      where(user: user).sum(&:duration)
+    end
+
     def total_duration_per_day(user)
       group("date(started_at)").where(user: user).sum(calculate_duration)
     end
