@@ -12,7 +12,8 @@ class ProfilesController < ApplicationController
       render :edit
     end
   rescue StandardError => e
-    flash.now[:danger] = "エラーが発生しました: #{e.message}"
+    Rails.logger.error("failed to update user profile. error: #{e}, message: #{e.message}")
+    set_alert("エラーが発生してプロフィールを更新できませんでした")
     render :edit
   end
 
