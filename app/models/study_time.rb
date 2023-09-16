@@ -13,7 +13,7 @@ class StudyTime < ApplicationRecord
 
   class << self
     def total_duration_for_user(user)
-      where(user: user).sum { |study_time| study_time.duration }
+      where(user: user).sum(&:duration)
     end
 
     def total_duration_per_day(user)
