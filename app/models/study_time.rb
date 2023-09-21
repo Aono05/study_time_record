@@ -16,6 +16,18 @@ class StudyTime < ApplicationRecord
       where(user: user).sum(&:duration)
     end
 
+    def calculate_consecutive_days(user)
+      today = Date.today
+      consecutive_days = 0
+
+      while user.study_times.where("date(started_at) = ?", today).exists?
+        consecutive_days += 1
+        today -= 1.day
+      end
+
+      consecutive_days
+    end
+
     def total_duration_per_day(user)
       group("date(started_at)").where(user: user).sum(calculate_duration)
     end
