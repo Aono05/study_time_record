@@ -5,3 +5,34 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+raise if !Rails.env.development?
+
+User.delete_all
+StudyTime.delete_all
+
+USER_COUNT = 20
+STUDY_TIME_COUNT = 5
+
+now = Time.now
+
+USER_COUNT.times do |n|
+  User.create(
+    email: "test#{n}@example.com",
+    encrypted_password: 'testtest',
+    name: "test_user#{n}",
+    introduction: "test_user#{n}です。"
+  )
+end
+
+user_ids = User.all.ids
+
+user_ids.each do |user_id|
+  STUDY_TIME_COUNT.times do |n|
+    StudyTime.create(
+      user_id: user_id,
+      started_at: now + n.days,
+      ended_at: now + 1.hour + n.days,
+    )
+  end
+end
