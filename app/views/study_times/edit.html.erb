@@ -24,6 +24,11 @@
   </div>
 
   <div>
+    <%= form.label :memo %>：
+    <%= form.text_area :memo, row: 4 %>
+  </div>
+
+  <div>
     <%= form.submit "更新する" %>
   </div>
 <% end %>

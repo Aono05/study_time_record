@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'study_times/index', to: 'study_times#index'
   resources :study_times
   resources :rankings
+  resource :profile,only: [:show, :edit, :update]
 end

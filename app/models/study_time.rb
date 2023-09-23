@@ -2,6 +2,7 @@ class StudyTime < ApplicationRecord
   belongs_to :user
   validates :started_at, presence: true
   validates :ended_at, presence: true
+  validates :memo, ngword: true
 
   def duration
     return 0 if ended_at.nil?
@@ -11,6 +12,10 @@ class StudyTime < ApplicationRecord
   end
 
   class << self
+    def total_duration_for_user(user)
+      where(user: user).sum(&:duration)
+    end
+
     def total_duration_per_day(user)
       group("date(started_at)").where(user: user).sum(calculate_duration)
     end
