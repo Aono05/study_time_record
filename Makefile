@@ -13,3 +13,7 @@ list:
 .PHONY: ranking
 ranking:
 	bundle exec rake ranking:update_ranking
+
+.PHONY: seed
+seed:
+	bundle exec rake db:seed
