@@ -19,7 +19,7 @@ now = Time.now
 USER_COUNT.times do |n|
   User.create(
     email: "test#{n}@example.com",
-    encrypted_password: 'testtest',
+    password: 'hoge1234567890@',
     name: "test_user#{n}",
     introduction: "test_user#{n}です。"
   )
@@ -31,8 +31,10 @@ user_ids.each do |user_id|
   STUDY_TIME_COUNT.times do |n|
     StudyTime.create(
       user_id: user_id,
-      started_at: now + n.days,
-      ended_at: now + 1.hour + n.days,
+      started_at: now - n.days,
+      ended_at: now + 1.hour - n.days,
+      created_at: now + 1.hour - n.days,
+      updated_at: now + 1.hour - n.days
     )
   end
 end

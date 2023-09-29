@@ -17,3 +17,7 @@ ranking:
 .PHONY: seed
 seed:
 	bundle exec rake db:seed
+
+.PHONY: migrate
+migrate:
+	rails db:migrate
