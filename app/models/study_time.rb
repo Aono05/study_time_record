@@ -17,12 +17,14 @@ class StudyTime < ApplicationRecord
     end
 
     def calculate_consecutive_days(user)
-      today = Date.today
       consecutive_days = 0
+      consecutive_calcurated_on = Time.current.to_date
 
-      while user.study_times.where("date(started_at) = ?", today).exists?
+      where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
+        break if consecutive_calcurated_on != study_time.started_at.to_date
+
         consecutive_days += 1
-        today -= 1.day
+        consecutive_calcurated_on = consecutive_calcurated_on.ago(1.day).to_date
       end
 
       consecutive_days
