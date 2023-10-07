@@ -20,6 +20,10 @@
       <th scope="row">連続勉強日数</th>
       <td><%= current_user.study_times.calculate_consecutive_days(current_user) %> 日</td>
     </tr>
+    <tr>
+      <th scope="row">最高連続勉強日数</th>
+      <td><%= current_user.study_times.max_consecutive_days_for_user(current_user) %> 日</td>
+    </tr>
   </table>
 
 <%= link_to '一覧に戻る', study_times_path %>

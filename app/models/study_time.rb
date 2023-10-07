@@ -21,6 +21,7 @@ class StudyTime < ApplicationRecord
       consecutive_calcurated_on = Time.current.to_date
 
       where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
+
         break if consecutive_calcurated_on != study_time.started_at.to_date
 
         consecutive_days += 1
@@ -28,6 +29,30 @@ class StudyTime < ApplicationRecord
       end
 
       consecutive_days
+    end
+
+    def max_consecutive_days_for_user(user)
+      consecutive_days = 0
+      max_consecutive_days = 0
+      consecutive_calcurated_on = Time.current.to_date
+      current_consecutive_days = 0
+
+      where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
+        study_day = study_time.started_at.to_date
+
+        if (consecutive_calcurated_on - study_day).to_i == 1
+          consecutive_days += 1
+        else
+          consecutive_days = 1
+        end
+
+        current_consecutive_days = [current_consecutive_days, consecutive_days].max
+        max_consecutive_days = [max_consecutive_days, current_consecutive_days].max
+        consecutive_calcurated_on = study_day
+
+      end
+
+      max_consecutive_days
     end
 
     def total_duration_per_day(user)
