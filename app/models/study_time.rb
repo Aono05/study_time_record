@@ -35,25 +35,22 @@ class StudyTime < ApplicationRecord
       consecutive_days = 0
       max_consecutive_days = 0
       consecutive_calcurated_on = Time.current.to_date
-      current_consecutive_days = 0
       loop_count = 0
 
       where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
-        study_day = study_time.started_at.to_date
+        study_started_on = study_time.started_at.to_date
 
-        if (consecutive_calcurated_on - study_day).to_i == 1
+        if (consecutive_calcurated_on - study_started_on).to_i == 1
           consecutive_days += 1
         else
           consecutive_days = 1
         end
 
-        #current_consecutive_days = [current_consecutive_days, consecutive_days].max
         max_consecutive_days = [max_consecutive_days, consecutive_days].max
-        consecutive_calcurated_on = study_day
+        consecutive_calcurated_on = study_started_on
 
         loop_count += 1
         puts "ループ回数: #{loop_count}"
-        puts "現在の連続勉強日数: #{current_consecutive_days}"
         puts "最大の連続勉強日数: #{max_consecutive_days}"
         puts "連続勉強日数の計算日: #{consecutive_calcurated_on}"
 
