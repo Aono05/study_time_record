@@ -11,6 +11,10 @@ class StudyTime < ApplicationRecord
     (ended_at - started_at) / 60
   end
 
+  def next_day?(based_on)
+    started_at.ago(1.day) == based_on
+  end
+
   class << self
     def total_duration_for_user(user)
       where(user: user).sum(&:duration)
@@ -35,12 +39,11 @@ class StudyTime < ApplicationRecord
       consecutive_days = 0
       max_consecutive_days = 0
       consecutive_calcurated_on = Time.current.to_date
-      loop_count = 0
 
       where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
         study_started_on = study_time.started_at.to_date
 
-        if (consecutive_calcurated_on - study_started_on).to_i == 1
+        if study_time.next_day?(consecutive_calcurated_on)
           consecutive_days += 1
         else
           consecutive_days = 1
@@ -48,13 +51,6 @@ class StudyTime < ApplicationRecord
 
         max_consecutive_days = [max_consecutive_days, consecutive_days].max
         consecutive_calcurated_on = study_started_on
-
-        loop_count += 1
-        puts "ループ回数: #{loop_count}"
-        puts "最大の連続勉強日数: #{max_consecutive_days}"
-        puts "連続勉強日数の計算日: #{consecutive_calcurated_on}"
-
-
       end
 
       max_consecutive_days
