@@ -11,8 +11,8 @@ raise if !Rails.env.development?
 User.delete_all
 StudyTime.delete_all
 
-USER_COUNT = 20
-STUDY_TIME_COUNT = 5
+USER_COUNT = 5
+STUDY_TIME_COUNT = 10
 
 now = Time.now
 
