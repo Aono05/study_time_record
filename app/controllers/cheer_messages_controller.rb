@@ -9,4 +9,24 @@ class CheerMessagesController < ApplicationController
   def index
     @cheer_messages = current_user.cheer_messages
   end
+
+  def new
+    @cheer_message = CheerMessage.new
+  end
+
+  def create
+    @cheer_message = current_user.cheer_messages.build(cheer_message_params)
+
+    if @cheer_message.save
+      redirect_to cheer_messages_path
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def cheer_message_params
+    params.require(:cheer_message).permit(:content)
+  end
 end
