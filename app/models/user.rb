@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   PASSWORD_REGEXP = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,64}$/
 
+  has_many :cheer_messages, dependent: :destroy
   has_many :study_times, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable

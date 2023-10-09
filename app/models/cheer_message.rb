@@ -1,4 +1,5 @@
 class CheerMessage < ApplicationRecord
+  belongs_to :user
   CHEER_MESSAGES = YAML.load_file("config/cheer_messages.yml")
 
   class << self
