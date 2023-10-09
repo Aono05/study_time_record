@@ -12,7 +12,7 @@ class StudyTime < ApplicationRecord
   end
 
   def next_day?(based_on)
-    started_at.ago(1.day) == based_on
+    started_at.to_date == based_on.ago(1.day).to_date
   end
 
   class << self
