@@ -1,5 +1,6 @@
 class CheerMessagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_cheer_message, only: [:show, :edit, :update, :destroy]
 
   def display
     #もしオリジナルの応援メッセージがある場合、それを表示。ない場合は、ランダムメッセージを表示する。
@@ -49,5 +50,9 @@ class CheerMessagesController < ApplicationController
 
   def cheer_message_params
     params.require(:cheer_message).permit(:content)
+  end
+
+  def set_cheer_message
+    @cheer_message = current_user.cheer_messages.find_by(id: params[:id])
   end
 end
