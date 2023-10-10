@@ -1,0 +1,15 @@
+<h1>勉強時間の編集</h1>
+
+<%= form_with(model: @cheer_message, local: true) do |form| %>
+
+  <div>
+    <%= form.label :応援メッセージ %>：
+    <%= form.text_area :content, row: 4 %>
+  </div>
+
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', study_times_path %>

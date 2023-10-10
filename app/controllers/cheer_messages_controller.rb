@@ -32,6 +32,19 @@ class CheerMessagesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @cheer_message.update!(cheer_message_params)
+      redirect_to @cheer_message
+    else
+      render 'edit'
+    end
+  rescue StandardError => e
+    redirect_to cheer_messages_path, notice: '応援メッセージの更新中にエラーが発生しました'
+  end
+
   private
 
   def cheer_message_params
