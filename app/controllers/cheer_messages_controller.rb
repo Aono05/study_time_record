@@ -24,6 +24,14 @@ class CheerMessagesController < ApplicationController
     end
   end
 
+  def show
+    if @cheer_message.present?
+      render :show
+    else
+      redirect_to cheer_messages_path, notice: '指定された応援メッセージが見つかりません'
+    end
+  end
+
   private
 
   def cheer_message_params
