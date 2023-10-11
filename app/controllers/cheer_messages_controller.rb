@@ -3,8 +3,11 @@ class CheerMessagesController < ApplicationController
   before_action :set_cheer_message, only: [:show, :edit, :update, :destroy]
 
   def display
-    #もしオリジナルの応援メッセージがある場合、それを表示。ない場合は、ランダムメッセージを表示する。
-    @random_cheer_message = CheerMessage.random_content
+    if current_user.cheer_messages.present?
+      @random_cheer_message = current_user.cheer_messages.sample.content
+    else
+      @random_cheer_message = CheerMessage.random_content
+    end
   end
 
   def index
