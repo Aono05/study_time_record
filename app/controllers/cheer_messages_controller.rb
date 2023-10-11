@@ -46,6 +46,11 @@ class CheerMessagesController < ApplicationController
     redirect_to cheer_messages_path, notice: '応援メッセージの更新中にエラーが発生しました'
   end
 
+  def destroy
+    @cheer_message&.destroy
+    redirect_to cheer_messages_path, notice: '応援メッセージを削除しました'
+  end
+
   private
 
   def cheer_message_params
