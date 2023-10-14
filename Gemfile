@@ -73,3 +73,7 @@ gem 'chartkick'
 gem 'activerecord-import'
 
 gem 'whenever', require: false
+
+gem 'carrierwave'
+
+gem 'mini_magick'
