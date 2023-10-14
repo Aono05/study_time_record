@@ -1,3 +1,9 @@
 <h1><%= @random_cheer_message %></h1>
 
+<% if @cheer_message.image? %>
+    <strong>応援画像:</strong>
+    <%= image_tag @cheer_message.image.url %>
+  </p>
+<% end %>
+
 <%= link_to("TOP", "/study_times/index")%>

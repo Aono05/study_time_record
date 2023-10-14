@@ -20,9 +20,16 @@
     <% end %>
 
     <div>
-      <%= form.label :content %>：
+      <%= form.label :応援メッセージ %>：
       <%= form.text_area :content, row: 2 %>
     </div>
+    <div>
+
+    <div class="field">
+      <%= form.label :応援画像 %>
+      <%= form.file_field :image %>
+    </div>
+
     <div>
       <%= form.submit "登録する" %>
     </div>
