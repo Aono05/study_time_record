@@ -57,7 +57,7 @@ class CheerMessagesController < ApplicationController
   private
 
   def cheer_message_params
-    params.require(:cheer_message).permit(:content)
+    params.require(:cheer_message).permit(:content, :image)
   end
 
   def set_cheer_message
