@@ -2,14 +2,6 @@ class CheerMessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_cheer_message, only: [:show, :edit, :update, :destroy]
 
-  def display
-    if current_user.cheer_messages.present?
-      @random_cheer_message = current_user.cheer_messages.sample.content
-    else
-      @random_cheer_message = CheerMessage.random_content
-    end
-  end
-
   def index
     @cheer_messages = current_user.cheer_messages
   end
