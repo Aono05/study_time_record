@@ -1,6 +1,5 @@
 class CheerMessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cheer_message, only: [:show, :edit, :update, :destroy]
 
   def index
     @cheer_messages = current_user.cheer_messages
@@ -21,6 +20,8 @@ class CheerMessagesController < ApplicationController
   end
 
   def show
+    @cheer_message = persisted_cheer_message
+
     if @cheer_message.present?
       render :show
     else
@@ -29,9 +30,12 @@ class CheerMessagesController < ApplicationController
   end
 
   def edit
+    @cheer_message = persisted_cheer_message
   end
 
   def update
+    @cheer_message = persisted_cheer_message
+
     if @cheer_message.update!(cheer_message_params)
       redirect_to @cheer_message
     else
@@ -42,7 +46,7 @@ class CheerMessagesController < ApplicationController
   end
 
   def destroy
-    @cheer_message&.destroy
+    persisted_cheer_message&.destroy
     redirect_to cheer_messages_path, notice: '応援メッセージを削除しました'
   end
 
@@ -52,7 +56,7 @@ class CheerMessagesController < ApplicationController
     params.require(:cheer_message).permit(:content, :image)
   end
 
-  def set_cheer_message
-    @cheer_message = current_user.cheer_messages.find_by(id: params[:id])
+  def persisted_cheer_message
+    current_user.cheer_messages.find_by(id: params[:id])
   end
 end
