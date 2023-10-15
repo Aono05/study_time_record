@@ -11,7 +11,7 @@ class StudyTime < ApplicationRecord
     (ended_at - started_at) / 60
   end
 
-  def next_day?(based_on)
+  def before_started_on?(based_on)
     started_at.to_date == based_on.ago(1.day).to_date
   end
 
@@ -43,7 +43,7 @@ class StudyTime < ApplicationRecord
       where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
         study_started_on = study_time.started_at.to_date
 
-        if study_time.next_day?(consecutive_calcurated_on)
+        if study_time.before_started_on?(consecutive_calcurated_on)
           consecutive_days += 1
         else
           consecutive_days = 1
