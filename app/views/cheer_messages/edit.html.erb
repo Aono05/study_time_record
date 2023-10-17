@@ -1,10 +1,23 @@
-<h1>勉強時間の編集</h1>
+<h1>応援メッセージの編集</h1>
 
 <%= form_with(model: @cheer_message, local: true) do |form| %>
+  <div>
+    <%= form.label :content, "応援メッセージ：" %>
+    <%= form.text_area :content, rows: 4 %>
+  </div>
 
   <div>
-    <%= form.label :応援メッセージ %>：
-    <%= form.text_area :content, row: 4 %>
+    <% if @cheer_message.image? %>
+      <div>
+        <p>現在の画像：</p>
+        <%= image_tag @cheer_message.image.url %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :image, "新しい画像をアップロード：" %>
+      <%= form.file_field :image %>
+    </div>
   </div>
 
   <div>
@@ -12,4 +25,4 @@
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', study_times_path %>
+<%= link_to '一覧に戻る', cheer_messages_path %>

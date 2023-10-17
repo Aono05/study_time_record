@@ -2,6 +2,10 @@
 
 <p>応援メッセージ：<%= @cheer_message.content %></p>
 
+<% if @cheer_message.image? %>
+  <%= image_tag @cheer_message.image.url %>
+<% end %>
+
 <br>
 
 <%= link_to '編集', edit_cheer_message_path(@cheer_message) %> |
