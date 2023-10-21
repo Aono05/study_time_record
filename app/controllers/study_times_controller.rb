@@ -4,6 +4,7 @@ class StudyTimesController < ApplicationController
 
   def index
     @random_cheer_message = CheerMessage.user_random_content(current_user)
+    @cheer_image = CheerMessage.cheer_message_image(current_user)
     @total_study_time_indexed_by_date = StudyTime.total_duration_per_day(current_user)
     @study_times = current_user.study_times.order(started_at: :asc)
   end

@@ -15,5 +15,13 @@ class CheerMessage < ApplicationRecord
     def random_content
       CHEER_MESSAGES.sample
     end
+
+    def cheer_message_image(user)
+      if user.cheer_messages.present?
+        @cheer_image = user.cheer_messages.sample.image.url
+      else
+        @cheer_image = ActionController::Base.helpers.asset_path("default.png")
+      end
+    end
   end
 end
