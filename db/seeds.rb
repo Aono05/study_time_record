@@ -10,9 +10,11 @@ raise if !Rails.env.development?
 
 User.delete_all
 StudyTime.delete_all
+CheerMessage.delete_all
 
 USER_COUNT = 5
 STUDY_TIME_COUNT = 10
+CHEER_MESSAGES_COUNT = 10
 
 now = Time.now
 
@@ -35,6 +37,18 @@ user_ids.each do |user_id|
       ended_at: now + 1.hour - n.days,
       created_at: now + 1.hour - n.days,
       updated_at: now + 1.hour - n.days
+    )
+  end
+end
+
+user_ids.each do |user_id|
+  CHEER_MESSAGES_COUNT.times do |n|
+    default_image_path = Rails.root.join('app', 'assets', 'images', 'default.png')
+
+    CheerMessage.create(
+      user_id: user_id,
+      content: "test#{n}回目がんばれ。",
+      image: File.open(File.exist?(default_image_path) ? default_image_path : '')
     )
   end
 end
