@@ -1,7 +1,7 @@
 <h1>勉強時間記録アプリ</h1>
 
-<h1><%= @random_cheer_message %></h1>
-<%= image_tag @cheer_image %>
+<h1><%= @random_cheer_message.content %></h1>
+<%= image_tag @random_cheer_message.valid_image %>
 
 <h4> メールアドレス： <%= current_user.email %> </h4>
 <%= link_to "プロフィール", profile_path %>
