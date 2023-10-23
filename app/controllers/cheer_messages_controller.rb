@@ -13,7 +13,7 @@ class CheerMessagesController < ApplicationController
     @cheer_message = current_user.cheer_messages.build(cheer_message_params)
 
     if @cheer_message.save
-      redirect_to cheer_messages_path
+      redirect_to cheer_messages_path, notice: '応援メッセージの作成に成功しました'
     else
       render 'new'
     end
@@ -57,6 +57,6 @@ class CheerMessagesController < ApplicationController
   end
 
   def persisted_cheer_message
-    current_user.cheer_messages.find_by(id: params[:id])
+    CheerMessage.find_by(id: params[:id])
   end
 end
