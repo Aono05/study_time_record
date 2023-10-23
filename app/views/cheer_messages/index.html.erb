@@ -9,13 +9,7 @@
     <% @cheer_messages.each do |cheer_message| %>
       <tr>
         <td><%= cheer_message.content %></td>
-        <td>
-          <% if cheer_message.image? %>
-            画像あり
-          <% else %>
-            画像なし
-          <% end %>
-        </td>
+        <td><%= cheer_message.check_image %></td>
         <td><%= link_to '詳細', cheer_message %></td>
         <td><%= link_to '編集', edit_cheer_message_path(cheer_message) %></td>
         <td><%= link_to '削除', cheer_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -12,6 +12,14 @@ class CheerMessage < ApplicationRecord
     end
   end
 
+  def check_image
+    if image.present?
+      "応援画像あり"
+    else
+      "応援画像なし"
+    end
+  end
+
   class << self
     def random(user)
       if user.cheer_messages.present?
