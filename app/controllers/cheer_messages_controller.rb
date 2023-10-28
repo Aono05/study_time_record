@@ -41,7 +41,7 @@ class CheerMessagesController < ApplicationController
     else
       render 'edit'
     end
-  rescue StandardError => e
+  rescue => e
     redirect_to cheer_messages_path, notice: '応援メッセージの更新中にエラーが発生しました'
   end
 

@@ -39,7 +39,7 @@ class StudyTimesController < ApplicationController
     else
       render 'edit'
     end
-  rescue StandardError => e
+  rescue => e
     redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
   end
 
