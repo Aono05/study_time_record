@@ -30,6 +30,7 @@ class CheerMessage < ApplicationRecord
     end
 
     private
+    
     def random_content
       content = CHEER_MESSAGES.sample
       CheerMessage.new(content: content)
