@@ -12,11 +12,11 @@ class CheerMessage < ApplicationRecord
     end
   end
 
-  def check_image
+  def uploaded_image_status
     if image.present?
-      "応援画像あり"
+      "画像あり"
     else
-      "応援画像なし"
+      "画像なし"
     end
   end
 
