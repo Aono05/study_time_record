@@ -12,7 +12,7 @@
         <td><%= cheer_message.uploaded_image_status %></td>
         <td><%= link_to '詳細', cheer_message %></td>
         <td><%= link_to '編集', edit_cheer_message_path(cheer_message) %></td>
-        <td><%= link_to '削除', cheer_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '削除', cheer_message, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
