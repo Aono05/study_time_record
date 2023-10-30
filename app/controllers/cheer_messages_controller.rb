@@ -12,11 +12,14 @@ class CheerMessagesController < ApplicationController
   def create
     @cheer_message = current_user.cheer_messages.build(cheer_message_params)
 
-    if @cheer_message.save
+    if @cheer_message.save!
       redirect_to cheer_messages_path, notice: '応援メッセージの作成に成功しました'
     else
       render 'new'
     end
+  rescue => e
+    logger.error "Unknown error while creating cheer message: #{e.message}"
+    redirect_to cheer_messages_path, alert: '予期せぬエラーが発生しました'
   end
 
   def show
@@ -42,6 +45,7 @@ class CheerMessagesController < ApplicationController
       render 'edit'
     end
   rescue => e
+    logger.warn "failed to update cheer message. message: #{e.message}"
     redirect_to cheer_messages_path, notice: '応援メッセージの更新中にエラーが発生しました'
   end
 
