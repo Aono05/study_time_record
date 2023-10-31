@@ -3,6 +3,7 @@ class StudyTimesController < ApplicationController
   before_action :set_study_time, only: [:show, :edit, :update, :destroy]
 
   def index
+    @random_cheer_message = CheerMessage.random(current_user.cheer_messages)
     @total_study_time_indexed_by_date = StudyTime.total_duration_per_day(current_user)
     @study_times = current_user.study_times.order(started_at: :asc)
   end
@@ -38,7 +39,7 @@ class StudyTimesController < ApplicationController
     else
       render 'edit'
     end
-  rescue StandardError => e
+  rescue => e
     redirect_to study_times_path, notice: '勉強時間の更新中にエラーが発生しました'
   end
 

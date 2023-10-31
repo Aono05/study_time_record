@@ -1,3 +1,26 @@
-<h1><%= @random_cheer_message %></h1>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cheer_messages.each do |cheer_message| %>
+      <tr>
+        <td><%= cheer_message.content %></td>
+        <td><%= cheer_message.uploaded_image_status %></td>
+        <td><%= link_to '詳細', cheer_message %></td>
+        <td><%= link_to '編集', edit_cheer_message_path(cheer_message) %></td>
+        <td><%= link_to '削除', cheer_message, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3>応援メッセージを作成する</h3>
+<%= link_to '新規応援メッセージ作成', new_cheer_message_path %>
+<br>
 
 <%= link_to("TOP", "/study_times/index")%>
