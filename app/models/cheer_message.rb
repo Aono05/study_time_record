@@ -21,9 +21,9 @@ class CheerMessage < ApplicationRecord
   end
 
   class << self
-    def random(user)
-      if user.cheer_messages.present?
-        user.cheer_messages.sample
+    def random(cheer_messages)
+      if cheer_messages.present?
+        cheer_messages.sample
       else
         random_content
       end
