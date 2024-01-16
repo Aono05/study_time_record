@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: render_app
+    name: study_time_record
     env: ruby
     region: singapore
     buildCommand: "./bin/render-build.sh"
