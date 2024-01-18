@@ -57,7 +57,9 @@ class StudyTime < ApplicationRecord
     end
 
     def total_duration_per_day(user)
-      group("date(started_at)").where(user: user).sum(calculate_duration)
+      select("SUM(EXTRACT(EPOCH FROM ended_at - started_at) / 60) AS sum_duration, date(started_at) AS date_started_at")
+        .where(user: user)
+        .group("date(started_at)")
     end
 
     def where_by_duration(started_at, ended_at)
