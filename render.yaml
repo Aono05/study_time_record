@@ -9,7 +9,7 @@ services:
     name: study_app
     env: ruby
     region: singapore
-    buildCommand: "./bin/render-build.sh"
+    buildCommand: "./bin/render-build.sh && RAILS_ENV=production rails assets:precompile"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: <%= ENV['DATABASE_URL'] %>
