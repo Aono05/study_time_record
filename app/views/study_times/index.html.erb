@@ -9,6 +9,7 @@
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 
 <%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
+<%= debug @total_study_time_indexed_by_date %>
 
 <table>
   <thead>
