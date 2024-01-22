@@ -8,7 +8,7 @@ class CheerMessage < ApplicationRecord
     if image.present?
       image.url
     else
-      asset_path(DEFAULT_IMAGE_NAME)
+      "/assets/#{DEFAULT_IMAGE_NAME}"
     end
   end
 
