@@ -8,7 +8,7 @@ class CheerMessage < ApplicationRecord
     if image.present?
       image.url
     else
-      ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
+      default_image_path
     end
   end
 
@@ -30,6 +30,10 @@ class CheerMessage < ApplicationRecord
     end
 
     private
+
+    def default_image_path
+      ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
+    end
 
     def random_content
       content = CHEER_MESSAGES.sample
