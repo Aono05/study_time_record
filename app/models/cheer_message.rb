@@ -20,6 +20,13 @@ class CheerMessage < ApplicationRecord
     end
   end
 
+  private
+
+  def default_image_path
+    ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
+  end
+
+
   class << self
     def random(cheer_messages)
       if cheer_messages.present?
@@ -30,10 +37,6 @@ class CheerMessage < ApplicationRecord
     end
 
     private
-
-    def default_image_path
-      ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
-    end
 
     def random_content
       content = CHEER_MESSAGES.sample
