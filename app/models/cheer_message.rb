@@ -1,14 +1,14 @@
 class CheerMessage < ApplicationRecord
   belongs_to :user
   CHEER_MESSAGES = YAML.load_file("config/cheer_messages.yml")
-  DEFAULT_IMAGE_NAME = "default-352d106fd99b9b67a39e17303dfe47a8e6c54727ec87bffecc3182cb8dcf7873.png".freeze
+  DEFAULT_IMAGE_NAME = "default.png".freeze
   mount_uploader :image, ImageUploader
 
   def valid_image
     if image.present?
       image.url
     else
-      "/public/#{DEFAULT_IMAGE_NAME}"
+      ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
     end
   end
 
