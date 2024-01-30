@@ -17,5 +17,6 @@
 
 //= require chartkick
 //= require Chart.bundle
+import "chartkick/chart.js"
 
 console.log('Hello World from Webpacker')
