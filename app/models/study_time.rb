@@ -60,6 +60,8 @@ class StudyTime < ApplicationRecord
       select("SUM(DATE_PART('epoch', ended_at - started_at) / 60) AS sum_duration, date(started_at) AS date_started_at")
         .where(user: user)
         .group("date(started_at)")
+        .pluck("date(started_at) AS date_started_at, SUM(DATE_PART('epoch', ended_at - started_at) / 60) AS sum_duration")
+        .to_h
     end
 
     def where_by_duration(started_at, ended_at)
