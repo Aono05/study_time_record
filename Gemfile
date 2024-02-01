@@ -77,3 +77,9 @@ gem 'whenever', require: false
 gem 'carrierwave'
 
 gem 'mini_magick'
+
+gem 'webpacker', '~> 5.0'
+
+gem 'net-http'
+
+gem 'pg', '>= 1.5.4'
