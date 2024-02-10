@@ -1,23 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe CheerMessage, type: :model do
-  let(:cheer_message) { described_class.new }
-
   describe '#valid_image' do
     context 'オリジナルの応援画像がある時' do
       it 'オリジナルの応援画像のURLが返ってくる' do
-        image_mock = double('image', present?: true, url: 'original_image_url')
-        allow(cheer_message).to receive(:image).and_return(image_mock)
-
-        expect(cheer_message.valid_image).to eq('original_image_url')
+        cheer_message = described_class.new(image: fixture_file_upload('image.jpeg', 'image/jpeg'))
+        expect(cheer_message.valid_image).to eq(cheer_message.image.url)
       end
     end
 
     context 'オリジナル応援画像がない時' do
       it 'デフォルト応援画像のURLが返ってくる' do
-        image_double = double('image', present?: false)
-        allow(cheer_message).to receive(:image).and_return(image_double)
-
+        cheer_message = described_class.new
         expect(cheer_message.valid_image).to eq("/assets/#{CheerMessage::DEFAULT_IMAGE_NAME}")
       end
     end
@@ -26,18 +20,14 @@ RSpec.describe CheerMessage, type: :model do
   describe '#uploaded_image_status' do
     context '応援画像がある時' do
       it '"画像あり"が返ってくる' do
-        image_double = double('image', present?: true)
-        allow(cheer_message).to receive(:image).and_return(image_double)
-
+        cheer_message = described_class.new(image: fixture_file_upload('image.jpeg', 'image/jpeg'))
         expect(cheer_message.uploaded_image_status).to eq('画像あり')
       end
     end
 
     context '応援画像がない時' do
       it '"画像なし"が返ってくる' do
-        image_double = double('image', present?: false)
-        allow(cheer_message).to receive(:image).and_return(image_double)
-
+        cheer_message = described_class.new
         expect(cheer_message.uploaded_image_status).to eq('画像なし')
       end
     end
