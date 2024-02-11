@@ -3,16 +3,21 @@ require 'rails_helper'
 RSpec.describe CheerMessage, type: :model do
   describe '#valid_image' do
     context 'オリジナルの応援画像がある時' do
+      let(:cheer_message) { described_class.new(image: fixture_file_upload('image.jpeg', 'image/jpeg')) }
+      let(:expected) { cheer_message.image.url }
+
       it 'オリジナルの応援画像のURLが返ってくる' do
-        cheer_message = described_class.new(image: fixture_file_upload('image.jpeg', 'image/jpeg'))
-        expect(cheer_message.valid_image).to eq(cheer_message.image.url)
+        expect(cheer_message.valid_image).to eq(expected)
       end
     end
 
     context 'オリジナル応援画像がない時' do
+      let(:cheer_message) { described_class.new }
+      let(:expected) {"/assets/#{CheerMessage::DEFAULT_IMAGE_NAME}"}
+
       it 'デフォルト応援画像のURLが返ってくる' do
         cheer_message = described_class.new
-        expect(cheer_message.valid_image).to eq("/assets/#{CheerMessage::DEFAULT_IMAGE_NAME}")
+        expect(cheer_message.valid_image).to eq(expected)
       end
     end
   end
