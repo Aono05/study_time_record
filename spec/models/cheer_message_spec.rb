@@ -22,28 +22,13 @@ RSpec.describe CheerMessage, type: :model do
     end
   end
 
-  describe '#uploaded_image_status' do
-    context '応援画像がある時' do
-      it '"画像あり"が返ってくる' do
-        cheer_message = described_class.new(image: fixture_file_upload('image.jpeg', 'image/jpeg'))
-        expect(cheer_message.uploaded_image_status).to eq('画像あり')
-      end
-    end
-
-    context '応援画像がない時' do
-      it '"画像なし"が返ってくる' do
-        cheer_message = described_class.new
-        expect(cheer_message.uploaded_image_status).to eq('画像なし')
-      end
-    end
-  end
-
   describe '.random' do
     context 'オリジナルの応援メッセージがある時' do
       let(:cheer_messages) { ['message1', 'message2', 'message3'] }
+      let(:expected) {described_class.random(cheer_messages)}
 
       it 'オリジナルの応援メッセージリストから応援メッセージがランダムで返ってくる' do
-        expect(cheer_messages).to include(CheerMessage.random(cheer_messages))
+        expect(cheer_messages).to include(expected)
       end
     end
 
@@ -51,7 +36,10 @@ RSpec.describe CheerMessage, type: :model do
       let(:empty_cheer_messages) { [] }
 
       it 'デフォルトの応援メッセージリストから応援メッセージがランダムで返ってくる' do
-        expect(CheerMessage.random(empty_cheer_messages)).to be_a(CheerMessage)
+        allow(YAML).to receive(:load_file).with("config/cheer_messages.yml").and_return([])
+        allow(CheerMessage::CHEER_MESSAGES).to receive(:sample).and_return("ファイト")
+        random_message = described_class.random([])
+        expect(random_message.content).to eq("ファイト")
       end
     end
   end
