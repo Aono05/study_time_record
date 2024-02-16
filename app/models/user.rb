@@ -15,6 +15,6 @@ class User < ApplicationRecord
     return if password.blank?
     return if password =~ PASSWORD_REGEXP
 
-    errors.add :password, 'Complexity requirement not met. Length should be 12-64 characters and include: 1 lowercase, 1 digit and 1 special character'
+    errors.add :password, 'パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。'
   end
 end
