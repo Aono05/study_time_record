@@ -21,6 +21,12 @@ RSpec.describe User, type: :model do
         expect(user).to be_invalid
         expect(user.errors[:password]).to include(password_error_message)
       end
+
+      it 'パスワードに数字がない場合、無効であること' do
+        user.password = 'PasswordWithoutNumber#!'
+        expect(user).to be_invalid
+        expect(user.errors[:password]).to include(password_error_message)
+      end
     end
   end
 end
