@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'Association' do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context 'cheer_messages' do
+      let(:target) { :cheer_messages }
+
+      it 'Userモデルは、CheerMessageモデルと1対多の関係であること' do
+        expect(association.macro).to eq :has_many
+        expect(association.options[:dependent]).to eq(:destroy)
+      end
+
+      it 'Userモデルは、StudyTimeモデルと1対多の関係であること' do
+        expect(association.macro).to eq :has_many
+        expect(association.options[:dependent]).to eq(:destroy)
+      end
+    end
+  end
+
   describe 'validation' do
     context 'パスワードのバリデーション' do
       let(:user) { build(:user) }
