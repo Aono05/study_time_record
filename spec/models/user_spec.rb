@@ -9,6 +9,12 @@ RSpec.describe User, type: :model do
       it "emailとパスワードが有効であること" do
         expect(user).to be_valid
       end
+
+      it 'パスワードが12文字以下の場合、無効であること' do
+        user.password = 'Short1#!'
+        expect(user).to be_invalid
+        expect(user.errors[:password]).to include(password_error_message)
+      end
     end
   end
 end
