@@ -15,6 +15,12 @@ RSpec.describe User, type: :model do
         expect(user).to be_invalid
         expect(user.errors[:password]).to include(password_error_message)
       end
+
+      it 'パスワードが64文字以上の場合、無効であること' do
+        user.password = 'ThisIsAVeryLongPasswordThatExceedsTheMaximumLengthLimitOf64Characters123#!'
+        expect(user).to be_invalid
+        expect(user.errors[:password]).to include(password_error_message)
+      end
     end
   end
 end
