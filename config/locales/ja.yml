@@ -17,3 +17,7 @@ ja:
             ended_at:
               blank: 終了時間を入力してください
               after: 開始時間より後の時間を入力してください
+        user:
+          attributes:
+            password:
+              blank: "パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。"
