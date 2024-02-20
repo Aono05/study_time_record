@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true
-  validates :password, presence: true, on: :update, allow_blank: true
+  validates :password, presence: true, on: :update, allow_blank: true #修正が必要
   validate :password_complexity
   validates :introduction, length: { maximum: 200 }
 
