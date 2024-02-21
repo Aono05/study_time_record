@@ -14,6 +14,22 @@ RSpec.describe StudyTime, type: :model do
     end
   end
 
+  describe 'validation' do
+    let(:study_time) { build(:study_time) }
+
+    context 'started_atが存在する場合' do
+      it '有効であること' do
+        expect(study_time).to validate_presence_of(:started_at)
+      end
+    end
+
+    context 'ended_atが存在する場合' do
+      it '有効であること' do
+        expect(study_time).to validate_presence_of(:ended_at)
+      end
+    end
+  end
+
   describe "#duration" do
     let(:study_time) { StudyTime.new(started_at: started_at, ended_at: ended_at) }
 
