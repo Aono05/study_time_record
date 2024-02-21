@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe StudyTime, type: :model do
+  describe 'Association' do
+    context 'user' do
+      let(:target) { :user }
+      let(:association) do
+        described_class.reflect_on_association(target)
+      end
+
+      it 'StudyTimeモデルはUserモデルに属していること' do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+  end
+
   describe "#duration" do
     let(:study_time) { StudyTime.new(started_at: started_at, ended_at: ended_at) }
 
