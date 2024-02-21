@@ -28,6 +28,20 @@ RSpec.describe StudyTime, type: :model do
         expect(study_time).to validate_presence_of(:ended_at)
       end
     end
+
+    context 'メモにNGワードが含まれる場合' do
+      it '無効であること' do
+        study_time.memo = 'NGワード'
+        expect(study_time).not_to be_valid
+        expect(study_time.errors[:memo]).to include('にNGワードが含まれています。')
+      end
+    end
+
+    context 'メモにNGワードが含まれない場合' do
+      it '有効であること' do
+        expect(study_time).to be_valid
+      end
+    end
   end
 
   describe "#duration" do
