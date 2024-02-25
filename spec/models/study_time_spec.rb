@@ -89,4 +89,18 @@ RSpec.describe StudyTime, type: :model do
         end
       end
   end
+
+  describe "#before_started_on?" do
+    let(:study_time) { StudyTime.new(started_at: started_at, ended_at: ended_at) }
+
+      context "started_atがbased_onの1日前と一致する場合" do
+        let(:based_on) { Time.zone.local(2023, 5, 26, 6, 0, 0) }
+        let(:started_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
+        let(:ended_at) { Time.zone.local(2023, 5, 25, 7, 0, 0) }
+
+        it "trueが返る" do
+          expect(study_time.before_started_on?(based_on)).to eq(true)
+        end
+      end
+  end
 end
