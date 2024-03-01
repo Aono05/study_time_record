@@ -4,7 +4,7 @@ class CheerMessage < ApplicationRecord
   DEFAULT_IMAGE_NAME = "default.png".freeze
   mount_uploader :image, ImageUploader
 
-  def valid_image
+  def valid_image_path
     if image.present?
       image.url
     else
