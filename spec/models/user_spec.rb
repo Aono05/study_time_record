@@ -45,6 +45,7 @@ RSpec.describe User, type: :model do
 
   describe 'validation' do
     let(:user) { build(:user) }
+
     context 'メールアドレスのバリデーション' do
       it 'emailが入力されていること' do
         expect(user).to validate_presence_of(:email)
@@ -52,8 +53,10 @@ RSpec.describe User, type: :model do
     end
 
     context 'introductionのバリデーション' do
-      it 'introductionが200文字以上の場合、無効であること' do
-        expect(subject).to validate_length_of(:introduction).is_at_most(200)
+      context 'introductionが200文字以上の場合' do
+        it '無効であること' do
+          expect(subject).to validate_length_of(:introduction).is_at_most(200)
+        end
       end
     end
 
