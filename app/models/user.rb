@@ -7,7 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true
-  validates :password, presence: true, on: :update, allow_blank: true #修正が必要
+  validates :password, presence: true, on: :update, allow_blank: true 
+  # FIXME: allow_blankしていると空文字を許容してしまうので許容しないように修正する必要がある
   validate :password_complexity
   validates :introduction, length: { maximum: 200 }
 
