@@ -61,46 +61,72 @@ RSpec.describe User, type: :model do
     end
 
     context 'パスワードのバリデーション' do
-      let(:password_error_message) { 'パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。' }
+      let(:password_error_message) { 'パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。' }  
 
-      it "パスワードが正しい形式の場合、有効であること" do
-        expect(user).to be_valid
+      before do
+        user.password = password
       end
 
-      it 'パスワードが空の場合、無効であること' do
-        user.password = ''
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードが正しい形式の場合' do
+        let(:password) { 'aaaabbbbcccc@1234' }
+
+        it '有効であること' do
+          expect(user).to be_valid
+        end
       end
 
-      it 'パスワードが正しい形式でない場合、無効であること' do
-        user.password = 'invalid'
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードが空の場合' do
+        let(:password) { '' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
       end
 
-      it 'パスワードが12文字以下の場合、無効であること' do
-        user.password = 'Short1#!'
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードが正しい形式でない場合' do
+        let(:password) { 'invalid' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
       end
 
-      it 'パスワードが64文字以上の場合、無効であること' do
-        user.password = 'ThisIsAVeryLongPasswordThatExceedsTheMaximumLengthLimitOf64Characters123#!'
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードが12文字以下の場合' do
+        let(:password) { 'Short1#!' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
       end
 
-      it 'パスワードに数字がない場合、無効であること' do
-        user.password = 'PasswordWithoutNumber#!'
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードが64文字以上の場合' do
+        let(:password) { 'hisIsAVeryLongPasswordThatExceedsTheMaximumLengthLimitOf64Characters123#!' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
       end
 
-      it 'パスワードに記号がない場合、無効であること' do
-        user.password = 'PasswordWithoutSpecialCharacter123'
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to include(password_error_message)
+      context 'パスワードに数字がない場合' do
+        let(:password) { 'PasswordWithoutNumber#!' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
+      end
+
+      context 'パスワードに記号がない場合' do
+        let(:password) { 'PasswordWithoutSpecialCharacter123' }
+
+        it '無効であること' do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to include(password_error_message)
+        end
       end
     end
   end
