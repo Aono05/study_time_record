@@ -22,24 +22,26 @@ RSpec.describe CheerMessage, type: :model do
     end
   end
 
-  describe '.random' do
+  describe '#random' do
+    let(:cheer_message) { described_class.new }
+    let(:output) { described_class.random(input) }
+
     context 'オリジナルの応援メッセージがある時' do
-      let(:cheer_messages) { ['message1', 'message2', 'message3'] }
-      let(:expected) {described_class.random(cheer_messages)}
+      let(:random_messages) { ["messageA", "messageB", "messageC"] }
+      let(:input) { random_messages }
+      let(:expected) { random_messages }
 
       it 'オリジナルの応援メッセージリストから応援メッセージがランダムで返ってくる' do
-        expect(cheer_messages).to include(expected)
+        expect(expected).to include(output)
       end
     end
 
     context 'オリジナルの応援メッセージがない時' do
-      let(:empty_cheer_messages) { [] }
+      let(:input) { [] }
+      let(:expected) { described_class::CHEER_MESSAGES }
 
       it 'デフォルトの応援メッセージリストから応援メッセージがランダムで返ってくる' do
-        allow(YAML).to receive(:load_file).with("config/cheer_messages.yml").and_return([])
-        allow(CheerMessage::CHEER_MESSAGES).to receive(:sample).and_return("ファイト")
-        random_message = described_class.random([])
-        expect(random_message.content).to eq("ファイト")
+        expect(expected).to include(output.content)
       end
     end
   end
