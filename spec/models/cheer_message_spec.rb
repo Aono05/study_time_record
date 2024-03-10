@@ -2,21 +2,22 @@ require 'rails_helper'
 
 RSpec.describe CheerMessage, type: :model do
   describe '#valid_image_path' do
+    let(:cheer_message) { described_class.new(image: input) }
+
     context 'オリジナルの応援画像がある時' do
-      let(:cheer_message) { described_class.new(image: fixture_file_upload('image.png', 'image/png')) }
-      let(:expected) { cheer_message.image.url }
+      let(:input) { (fixture_file_upload('image.png'))}
+      let(:expected) { "/uploads/tmp/[0-9-]+/image.png" }
 
       it 'オリジナルの応援画像のpathが返ってくる' do
-        expect(cheer_message.valid_image_path).to eq(expected)
+        expect(cheer_message.valid_image_path).to match(expected)
       end
     end
 
     context 'オリジナル応援画像がない時' do
-      let(:cheer_message) { described_class.new }
+      let(:input) { [] }
       let(:expected) {"/assets/default.png"}
 
       it 'デフォルト応援画像のpathが返ってくる' do
-        cheer_message = described_class.new
         expect(cheer_message.valid_image_path).to eq(expected)
       end
     end
