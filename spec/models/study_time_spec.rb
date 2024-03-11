@@ -19,13 +19,34 @@ RSpec.describe StudyTime, type: :model do
 
     context 'started_atが存在する場合' do
       it '有効であること' do
-        expect(study_time).to validate_presence_of(:started_at)
+        expect(study_time).to be_valid
       end
+    end
+
+    context 'started_atが存在しない場合' do
+      let(:study_time) { build(:study_time, started_at: started_at) }
+      let(:started_at) { [] }
+
+      it '無効であること' do
+        expect(study_time).to be_invalid
+      end
+
+      it { expect(study_time).to validate_presence_of :started_at }
+      #どちらが良いか確認
     end
 
     context 'ended_atが存在する場合' do
       it '有効であること' do
-        expect(study_time).to validate_presence_of(:ended_at)
+        expect(study_time).to be_valid
+      end
+    end
+
+    context 'ended_atが存在しない場合' do
+      let(:study_time) { build(:study_time, ended_at: ended_at) }
+      let(:ended_at) { [] }
+
+      it '無効であること' do
+        expect(study_time).to be_invalid
       end
     end
 
