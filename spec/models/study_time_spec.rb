@@ -225,4 +225,86 @@ RSpec.describe StudyTime, type: :model do
       end
     end
   end
+  describe ".max_consecutive_days_for_user" do
+    let(:output) { described_class.max_consecutive_days_for_user(user) }
+    let(:user) { create(:user) }
+
+    context "学習時間が連続している場合" do
+      let!(:study_times) {
+        [
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 25, 7, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 26, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 26, 8, 0, 0)
+          ),
+        ]
+      }
+      let(:expected) { 2 }
+
+      it "ユーザーの最大連続した学習日数が返る" do
+        expect(output).to eq(expected)
+      end
+    end
+
+    context "学習時間が連続していない場合" do
+      let!(:study_times) {
+        [
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 25, 7, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
+          ),
+        ]
+      }
+      let(:expected) { 1 }
+
+      it "ユーザーの最大連続した学習日数が返る" do
+        expect(output).to eq(expected)
+      end
+    end
+
+    context "学習時間が途切れて連続している場合" do
+      let!(:study_times) {
+        [
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 25, 7, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 26, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 26, 8, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 28, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 28, 8, 0, 0)
+          ),
+        ]
+      }
+      let(:expected) { 2 }
+
+      it "ユーザーの最大連続した学習日数が返る" do
+        expect(output).to eq(expected)
+      end
+    end
+  end
 end
