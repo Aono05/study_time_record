@@ -307,4 +307,30 @@ RSpec.describe StudyTime, type: :model do
       end
     end
   end
+
+  describe ".total_duration_per_day" do
+    let(:output) { described_class.total_duration_per_day(user) }
+    let(:user) { create(:user) }
+    let!(:study_times) {
+      [
+        create(
+          :study_time,
+          user: user,
+          started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+          ended_at: Time.zone.local(2023, 5, 25, 7, 0, 0)
+        ),
+        create(
+          :study_time,
+          user: user,
+          started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+          ended_at: Time.zone.local(2023, 5, 25, 8, 0, 0)
+        ),
+      ]
+    }
+    let(:expected) { { "2023-05-25" => 180 } }
+
+    it "ユーザーの1日の学習時間の合計が返る" do
+      expect(output).to eq(expected)
+    end
+  end
 end
