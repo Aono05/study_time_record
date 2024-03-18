@@ -168,4 +168,61 @@ RSpec.describe StudyTime, type: :model do
       expect(output).to eq(expected)
     end
   end
+
+  describe ".calculate_consecutive_days" do
+    let(:output) { described_class.calculate_consecutive_days(user) }
+    let(:user) { create(:user) }
+
+    context "学習時間が連続している場合" do
+      let(:consecutive_calculated_on) { Date.new(2023, 5, 27) }
+      let!(:study_times) {
+        [
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 26, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 26, 7, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
+          ),
+        ]
+      }
+      let(:expected) { 2 }
+
+      it "ユーザーの連続した学習日数が返る" do
+        allow(Time).to receive(:current).and_return(consecutive_calculated_on)
+        expect(output).to eq(expected)
+      end
+    end
+
+    context "学習時間が連続していない場合" do
+      let(:consecutive_calculated_on) { Date.new(2023, 5, 28) }
+      let!(:study_times) {
+        [
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 25, 7, 0, 0)
+          ),
+          create(
+            :study_time,
+            user: user,
+            started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
+            ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
+          ),
+        ]
+      }
+      let(:expected) { 0 }
+
+      it "ユーザーの連続した学習日数が返る" do
+        allow(Time).to receive(:current).and_return(consecutive_calculated_on)
+        expect(output).to eq(expected)
+      end
+    end
+  end
 end
