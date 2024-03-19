@@ -333,4 +333,42 @@ RSpec.describe StudyTime, type: :model do
       expect(output).to eq(expected)
     end
   end
+
+  describe ".where_by_duration" do
+    let(:output) { described_class.where_by_duration(started_at, ended_at) }
+    let(:started_at) { Time.zone.local(2024, 1, 1, 12, 0, 0) }
+    let(:ended_at) { Time.zone.local(2024, 1, 2, 14, 0, 0) }
+    let(:user) { create(:user) }
+
+    context "指定された時間範囲内のレコードが存在する場合" do
+      let!(:study_times) {
+        create(
+          :study_time,
+          user: user,
+          started_at: Time.zone.local(2024, 1, 1, 13, 0, 0),
+          ended_at: Time.zone.local(2024, 1, 1, 13, 30, 0)
+        )
+      }
+
+      it "指定された時間範囲内のレコードを返す" do
+        expect(output).to include(study_times)
+      end
+    end
+
+    context "指定された時間範囲内のレコードが存在しない場合" do
+      let!(:studytimes) {
+        create(
+          :study_time,
+          started_at: Time.zone.local(2024, 1, 1, 10, 0, 0),
+          ended_at: Time.zone.local(2024, 1, 1, 11, 0, 0)
+        )
+      }
+
+      let(:expected) { [] }
+
+      it "空の結果を返す" do
+        expect(output).to eq(expected)
+      end
+    end
+  end
 end
