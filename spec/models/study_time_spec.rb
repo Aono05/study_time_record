@@ -159,7 +159,7 @@ RSpec.describe StudyTime, type: :model do
           user: user,
           started_at: Time.zone.local(2023, 5, 26, 6, 0, 0),
           ended_at: Time.zone.local(2023, 5, 26, 8, 0, 0)
-        ),
+        )
       ]
     }
     let(:expected) { 180.0 }
@@ -188,7 +188,7 @@ RSpec.describe StudyTime, type: :model do
             user: user,
             started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
             ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
-          ),
+          )
         ]
       }
       let(:expected) { 2 }
@@ -214,7 +214,7 @@ RSpec.describe StudyTime, type: :model do
             user: user,
             started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
             ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
-          ),
+          )
         ]
       }
       let(:expected) { 0 }
@@ -243,7 +243,7 @@ RSpec.describe StudyTime, type: :model do
             user: user,
             started_at: Time.zone.local(2023, 5, 26, 6, 0, 0),
             ended_at: Time.zone.local(2023, 5, 26, 8, 0, 0)
-          ),
+          )
         ]
       }
       let(:expected) { 2 }
@@ -267,7 +267,7 @@ RSpec.describe StudyTime, type: :model do
             user: user,
             started_at: Time.zone.local(2023, 5, 27, 6, 0, 0),
             ended_at: Time.zone.local(2023, 5, 27, 8, 0, 0)
-          ),
+          )
         ]
       }
       let(:expected) { 1 }
@@ -297,7 +297,7 @@ RSpec.describe StudyTime, type: :model do
             user: user,
             started_at: Time.zone.local(2023, 5, 28, 6, 0, 0),
             ended_at: Time.zone.local(2023, 5, 28, 8, 0, 0)
-          ),
+          )
         ]
       }
       let(:expected) { 2 }
@@ -324,7 +324,7 @@ RSpec.describe StudyTime, type: :model do
           user: user,
           started_at: Time.zone.local(2023, 5, 25, 6, 0, 0),
           ended_at: Time.zone.local(2023, 5, 25, 8, 0, 0)
-        ),
+        )
       ]
     }
     let(:expected) { { "2023-05-25" => 180 } }
