@@ -5,6 +5,7 @@
     <tr>
       <th>順位</th>
       <th>User_id</th>
+      <th>名前</th>
       <th>1週間の合計勉強時間 (分)</th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
       <tr>
         <td><%= index %></td>
         <td><%= ranking.user_id %></td>
+        <td><%= ranking.user.name %></td>
         <td><%= ranking.total_duration %></td>
       </tr>
     <% end %>
