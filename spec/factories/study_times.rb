@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :study_time do
-    started_at            { Time.zone.now }
-    ended_at              { Time.zone.now }
+    started_at            { Time.current }
+    ended_at              { Time.current }
     user_id               { 'test user' }
-    created_at            { Time.zone.now }
-    updated_at            { Time.zone.now }
+    created_at            { Time.current }
+    updated_at            { Time.current }
     memo                  {'有効なメモ'}
 
     association :user
