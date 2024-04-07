@@ -291,7 +291,7 @@ RSpec.describe StudyTime, type: :model do
   end
 
   describe ".total_duration_per_day" do
-    let(:output) { described_class.total_duration_per_day(user) }
+    subject { described_class.total_duration_per_day(user) }
     let(:user) { create(:user) }
     let!(:study_times) {
       [
@@ -312,7 +312,7 @@ RSpec.describe StudyTime, type: :model do
     let(:expected) { { "2023-05-25" => 180 } }
 
     it "ユーザーの1日の学習時間の合計が返る" do
-      expect(output).to eq(expected)
+      is_expected.to eq expected
     end
   end
 
