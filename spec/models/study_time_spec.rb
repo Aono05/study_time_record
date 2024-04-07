@@ -206,9 +206,9 @@ RSpec.describe StudyTime, type: :model do
       end
     end
   end
-  
+
   describe ".max_consecutive_days_for_user" do
-    let(:output) { described_class.max_consecutive_days_for_user(user) }
+    subject { described_class.max_consecutive_days_for_user(user) }
     let(:user) { create(:user) }
 
     context "学習時間が連続している場合" do
@@ -231,7 +231,7 @@ RSpec.describe StudyTime, type: :model do
       let(:expected) { 2 }
 
       it "ユーザーの最大連続した学習日数が返る" do
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
 
@@ -255,7 +255,7 @@ RSpec.describe StudyTime, type: :model do
       let(:expected) { 1 }
 
       it "ユーザーの最大連続した学習日数が返る" do
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
 
@@ -285,7 +285,7 @@ RSpec.describe StudyTime, type: :model do
       let(:expected) { 2 }
 
       it "ユーザーの最大連続した学習日数が返る" do
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
   end
