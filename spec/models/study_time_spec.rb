@@ -317,7 +317,7 @@ RSpec.describe StudyTime, type: :model do
   end
 
   describe ".where_by_duration" do
-    let(:output) { described_class.where_by_duration(started_at, ended_at) }
+    subject { described_class.where_by_duration(started_at, ended_at) }
     let(:started_at) { Time.zone.local(2024, 1, 1, 12, 0, 0) }
     let(:ended_at) { Time.zone.local(2024, 1, 2, 14, 0, 0) }
     let(:user) { create(:user) }
@@ -333,7 +333,7 @@ RSpec.describe StudyTime, type: :model do
       }
 
       it "指定された時間範囲内のレコードを返す" do
-        expect(output).to include(study_times)
+        is_expected.to eq [study_times]
       end
     end
 
@@ -349,7 +349,7 @@ RSpec.describe StudyTime, type: :model do
       let(:expected) { [] }
 
       it "空の結果を返す" do
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
   end
