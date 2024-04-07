@@ -46,6 +46,7 @@ RSpec.describe StudyTime, type: :model do
   end
 
   describe "#duration" do
+    subject { study_time.duration }
     let(:study_time) { StudyTime.new(started_at: started_at, ended_at: ended_at) }
 
     context "終了時間が設定されている場合" do
@@ -55,7 +56,7 @@ RSpec.describe StudyTime, type: :model do
         let(:expected) { 1 }
 
         it "1分と表示される" do
-          expect(study_time.duration).to eq(expected)
+          is_expected.to eq expected
         end
       end
 
@@ -65,7 +66,7 @@ RSpec.describe StudyTime, type: :model do
         let(:expected) { 0 }
 
         it "0分と表示される" do
-          expect(study_time.duration).to eq(expected)
+          is_expected.to eq expected
         end
       end
 
@@ -75,7 +76,7 @@ RSpec.describe StudyTime, type: :model do
         let(:expected) { 0 }
 
         it "0分と表示される" do
-          expect(study_time.duration).to eq(expected)
+          is_expected.to eq expected
         end
       end
     end
@@ -86,7 +87,7 @@ RSpec.describe StudyTime, type: :model do
       let(:expected) { 0 }
 
       it "0分と表示される" do
-        expect(study_time.duration).to eq(expected)
+        is_expected.to eq expected
       end
     end
   end
