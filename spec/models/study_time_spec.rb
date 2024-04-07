@@ -51,9 +51,9 @@ RSpec.describe StudyTime, type: :model do
 
     context "終了時間が設定されている場合" do
       context "開始時間より終了時間が遅い場合" do
+        let(:expected) { 1 }
         let(:started_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
         let(:ended_at) { Time.zone.local(2023, 5, 25, 6, 1, 0) }
-        let(:expected) { 1 }
 
         it "1分と表示される" do
           is_expected.to eq expected
@@ -61,9 +61,9 @@ RSpec.describe StudyTime, type: :model do
       end
 
       context "開始時間と終了時間が同じ場合" do
+        let(:expected) { 0 }
         let(:started_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
         let(:ended_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
-        let(:expected) { 0 }
 
         it "0分と表示される" do
           is_expected.to eq expected
@@ -71,9 +71,9 @@ RSpec.describe StudyTime, type: :model do
       end
 
       context "開始時間が終了時間より後の場合" do
+        let(:expected) { 0 }
         let(:started_at) { Time.zone.local(2023, 5, 25, 6, 1, 0) }
         let(:ended_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
-        let(:expected) { 0 }
 
         it "0分と表示される" do
           is_expected.to eq expected
@@ -82,9 +82,9 @@ RSpec.describe StudyTime, type: :model do
     end
 
     context "終了時間が設定されていない場合" do
+      let(:expected) { 0 }
       let(:started_at) { Time.zone.local(2023, 5, 25, 6, 0, 0) }
       let(:ended_at) { nil }
-      let(:expected) { 0 }
 
       it "0分と表示される" do
         is_expected.to eq expected
@@ -126,6 +126,7 @@ RSpec.describe StudyTime, type: :model do
 
   describe ".total_duration_for_user" do
     subject { described_class.total_duration_for_user(user) }
+    let(:expected) { 180.0 }
     let(:user) { create(:user) }
     let!(:study_times) {
       [
@@ -143,7 +144,6 @@ RSpec.describe StudyTime, type: :model do
         )
       ]
     }
-    let(:expected) { 180.0 }
 
     it "ユーザーの学習時間の合計が返る" do
       is_expected.to eq expected
@@ -155,6 +155,7 @@ RSpec.describe StudyTime, type: :model do
     let(:user) { create(:user) }
 
     context "学習時間が連続している場合" do
+      let(:expected) { 2 }
       let(:consecutive_calculated_on) { Date.new(2023, 5, 27) }
       let!(:study_times) {
         [
@@ -172,7 +173,6 @@ RSpec.describe StudyTime, type: :model do
           )
         ]
       }
-      let(:expected) { 2 }
 
       it "ユーザーの連続した学習日数が返る" do
         allow(Time).to receive(:current).and_return(consecutive_calculated_on)
@@ -181,6 +181,7 @@ RSpec.describe StudyTime, type: :model do
     end
 
     context "学習時間が連続していない場合" do
+      let(:expected) { 0 }
       let(:consecutive_calculated_on) { Date.new(2023, 5, 28) }
       let!(:study_times) {
         [
@@ -198,7 +199,6 @@ RSpec.describe StudyTime, type: :model do
           )
         ]
       }
-      let(:expected) { 0 }
 
       it "ユーザーの連続した学習日数が返る" do
         allow(Time).to receive(:current).and_return(consecutive_calculated_on)
@@ -212,6 +212,7 @@ RSpec.describe StudyTime, type: :model do
     let(:user) { create(:user) }
 
     context "学習時間が連続している場合" do
+      let(:expected) { 2 }
       let!(:study_times) {
         [
           create(
@@ -228,7 +229,6 @@ RSpec.describe StudyTime, type: :model do
           )
         ]
       }
-      let(:expected) { 2 }
 
       it "ユーザーの最大連続した学習日数が返る" do
         is_expected.to eq expected
@@ -236,6 +236,7 @@ RSpec.describe StudyTime, type: :model do
     end
 
     context "学習時間が連続していない場合" do
+      let(:expected) { 1 }
       let!(:study_times) {
         [
           create(
@@ -252,7 +253,6 @@ RSpec.describe StudyTime, type: :model do
           )
         ]
       }
-      let(:expected) { 1 }
 
       it "ユーザーの最大連続した学習日数が返る" do
         is_expected.to eq expected
@@ -260,6 +260,7 @@ RSpec.describe StudyTime, type: :model do
     end
 
     context "学習時間が途切れて連続している場合" do
+      let(:expected) { 2 }
       let!(:study_times) {
         [
           create(
@@ -282,7 +283,6 @@ RSpec.describe StudyTime, type: :model do
           )
         ]
       }
-      let(:expected) { 2 }
 
       it "ユーザーの最大連続した学習日数が返る" do
         is_expected.to eq expected
@@ -292,6 +292,7 @@ RSpec.describe StudyTime, type: :model do
 
   describe ".total_duration_per_day" do
     subject { described_class.total_duration_per_day(user) }
+    let(:expected) { { "2023-05-25" => 180 } }
     let(:user) { create(:user) }
     let!(:study_times) {
       [
@@ -309,7 +310,6 @@ RSpec.describe StudyTime, type: :model do
         )
       ]
     }
-    let(:expected) { { "2023-05-25" => 180 } }
 
     it "ユーザーの1日の学習時間の合計が返る" do
       is_expected.to eq expected
@@ -338,6 +338,7 @@ RSpec.describe StudyTime, type: :model do
     end
 
     context "指定された時間範囲内のレコードが存在しない場合" do
+      let(:expected) { [] }
       let!(:studytimes) {
         create(
           :study_time,
@@ -345,8 +346,6 @@ RSpec.describe StudyTime, type: :model do
           ended_at: Time.zone.local(2024, 1, 1, 11, 0, 0)
         )
       }
-
-      let(:expected) { [] }
 
       it "空の結果を返す" do
         is_expected.to eq expected
