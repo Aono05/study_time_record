@@ -151,7 +151,7 @@ RSpec.describe StudyTime, type: :model do
   end
 
   describe ".calculate_consecutive_days" do
-    let(:output) { described_class.calculate_consecutive_days(user) }
+    subject { described_class.calculate_consecutive_days(user) }
     let(:user) { create(:user) }
 
     context "学習時間が連続している場合" do
@@ -176,7 +176,7 @@ RSpec.describe StudyTime, type: :model do
 
       it "ユーザーの連続した学習日数が返る" do
         allow(Time).to receive(:current).and_return(consecutive_calculated_on)
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
 
@@ -202,10 +202,11 @@ RSpec.describe StudyTime, type: :model do
 
       it "ユーザーの連続した学習日数が返る" do
         allow(Time).to receive(:current).and_return(consecutive_calculated_on)
-        expect(output).to eq(expected)
+        is_expected.to eq expected
       end
     end
   end
+  
   describe ".max_consecutive_days_for_user" do
     let(:output) { described_class.max_consecutive_days_for_user(user) }
     let(:user) { create(:user) }
