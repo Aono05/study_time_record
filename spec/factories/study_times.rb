@@ -6,6 +6,7 @@ FactoryBot.define do
     created_at            { Time.current }
     updated_at            { Time.current }
     memo                  {'有効なメモ'}
+    
     association :user
   end
 end
