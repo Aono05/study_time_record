@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
       end
 
       context "パスワードが空の場合" do
-        include_examples "password is invalid", "[]"
+        include_examples "password is invalid", ""
       end
 
       context "パスワードが正しい形式でない場合" do
