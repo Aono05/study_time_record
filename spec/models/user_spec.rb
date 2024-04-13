@@ -53,15 +53,18 @@ RSpec.describe User, type: :model do
     end
 
     context 'パスワードのバリデーション' do
+      subject { build(:user, password: password).valid? }
+
       context "パスワードが正しい形式の場合" do
         let(:password) { "aaaabbbbcccc@1234" }
 
         it "有効であること" do
-          expect(user).to be_valid
+          is_expected.to eq true
         end
       end
 
       shared_examples "password is invalid" do |password|
+        let(:password) { 'aaaabbbbcccc1234' }
         let(:password_error_message) { "パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。" }
 
         before do
@@ -70,6 +73,10 @@ RSpec.describe User, type: :model do
 
         it "無効であること" do
           expect(user).to be_invalid
+        end
+
+        it "エラーメッセージが正しいこと" do
+          user.valid?
           expect(user.errors[:password]).to include(password_error_message)
         end
       end
