@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true
   validates :password, presence: true, on: :update, allow_blank: true
+  # FIXME: allow_blankしていると空文字を許容してしまうので許容しないように修正する必要がある
   validate :password_complexity
   validates :introduction, length: { maximum: 200 }
 
@@ -15,6 +16,6 @@ class User < ApplicationRecord
     return if password.blank?
     return if password =~ PASSWORD_REGEXP
 
-    errors.add :password, 'Complexity requirement not met. Length should be 12-64 characters and include: 1 lowercase, 1 digit and 1 special character'
+    errors.add :password, I18n.t('activerecord.errors.models.user.attributes.password.blank')
   end
 end
