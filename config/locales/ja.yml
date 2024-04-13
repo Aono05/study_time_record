@@ -10,21 +10,6 @@ ja:
         ended_at: 終了時間
     errors:
       models:
-        user:
-          attributes:
-            name:
-              blank: 名前を入力してください
-              too_long: 名前は%{count}文字以内で入力してください
-            email:
-              blank: メールアドレスを入力してください
-              invalid: メールアドレスの形式で入力してください
-              taken: そのメールアドレスは既に使用されています
-            password:
-              blank: パスワードを入力してください
-              too_short: パスワードは%{count}文字以上で入力してください
-            password_confirmation:
-              blank: パスワード（確認）を入力してください
-              confirmation: パスワードとパスワード（確認）が一致しません
         study_time:
           attributes:
             started_at:
@@ -32,5 +17,7 @@ ja:
             ended_at:
               blank: 終了時間を入力してください
               after: 開始時間より後の時間を入力してください
-      messages:
-        record_invalid: "バリデーションに失敗しました: %{errors}"
+        user:
+          attributes:
+            password:
+              blank: "パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。"
