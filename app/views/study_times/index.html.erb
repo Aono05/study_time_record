@@ -1,4 +1,4 @@
-<h1>勉強時間記録アプリ</h1>
+<h1 class="centered bold">勉強時間記録アプリ</h1>
 
 <div class="message-container">
   <div class="outer-box">
@@ -10,12 +10,12 @@
   </div>
 </div>
 
-
-
-<h4> メールアドレス： <%= current_user.email %> </h4>
-<%= link_to "プロフィール", profile_path %>
-<%= link_to "オリジナル応援メッセージ一覧", cheer_messages_path %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<div class="centered">
+  <h4> 名前： <%= current_user.name %> </h4>
+  <%= link_to "プロフィール", profile_path, class: "button" %>
+  <%= link_to "オリジナル応援メッセージ一覧", cheer_messages_path, class: "button" %>
+  <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button" %>
+</div>
 
 <%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
 
@@ -46,7 +46,7 @@
 </table>
 
 <br>
-<div class="button-container">
+<div class="centered">
   <%= link_to '勉強時間記録', new_study_time_path, class: 'button' %>
 </div>
 
