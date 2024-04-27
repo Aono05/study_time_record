@@ -12,9 +12,9 @@
 
 <div class="centered">
   <h4> 名前： <%= current_user.name %> </h4>
-  <%= link_to "プロフィール", profile_path, class: "button" %>
-  <%= link_to "オリジナル応援メッセージ一覧", cheer_messages_path, class: "button" %>
-  <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button" %>
+  <%= link_to "プロフィール", profile_path, class: "button profile-button" %>
+  <%= link_to "オリジナル応援メッセージ一覧", cheer_messages_path, class: "button cheer-button" %>
+  <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button logout-button" %>
 </div>
 
 <%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
@@ -47,9 +47,9 @@
 
 <br>
 <div class="centered">
-  <%= link_to '勉強時間記録', new_study_time_path, class: 'button' %>
+  <%= link_to '勉強時間記録', new_study_time_path, class: 'button study-time-button' %>
 </div>
 
 <div class="centered">
-  <%= link_to '週間勉強時間ランキング', rankings_path, class: 'button' %>
+  <%= link_to '週間勉強時間ランキング', rankings_path, class: 'button ranking-button' %>
 </div>

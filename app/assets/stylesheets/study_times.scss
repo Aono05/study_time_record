@@ -36,29 +36,36 @@
   text-decoration: underline; /* 下線を引く */
 }
 
-.button-container {
-  text-align: center;
+.profile-button {
+  background-color: #17bbe0; /* プロフィールボタンの色 */
 }
 
-.button-container {
-  display: inline-block;
+.cheer-button {
+  background-color: #0088ff; /* オリジナル応援メッセージ一覧ボタンの色 */
 }
 
-.button-container {
-  text-align: center;
+.logout-button {
+  background-color: #666861; /* ログアウトボタンの色 */
 }
 
+.study-time-button {
+  background-color: #1a46c9; /* 勉強時間記録ボタンの色 */
+}
+
+.ranking-button {
+  background-color: #2849ce; /* 週間勉強時間ランキングボタンの色 */
+}
+
+/* ボタンの共通スタイル */
 .button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #4CAF50;
   color: white;
   text-decoration: none;
-  border: 1px solid #4CAF50;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .button:hover {
-  background-color: #45a049;
+  opacity: 0.8; /* ホバー時の透明度 */
 }
