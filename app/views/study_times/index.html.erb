@@ -19,7 +19,7 @@
 
 <%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
 
-<table>
+<table class="center-table">
   <thead>
     <tr>
       <th>Start time</th>
@@ -50,6 +50,6 @@
   <%= link_to '勉強時間記録', new_study_time_path, class: 'button' %>
 </div>
 
-
-<h3>週間勉強時間ランキング</h3>
-<%= link_to 'Rankings', rankings_path %>
+<div class="centered">
+  <%= link_to '週間勉強時間ランキング', rankings_path, class: 'button' %>
+</div>

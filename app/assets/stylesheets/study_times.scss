@@ -6,6 +6,11 @@
   font-weight: bold;
 }
 
+.center-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .outer-box {
   display: inline-block; /* 文字の幅に合わせるためにインラインブロックに設定 */
   border: 2px solid #ccc; /* 外側の枠線 */
