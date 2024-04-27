@@ -7,7 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true
-  validates :password, presence: true, on: :create
+  validates :password, presence: true, on: :update, allow_blank: true
+  # FIXME: allow_blankしていると空文字を許容してしまうので許容しないように修正する必要がある
   validate :password_complexity
   validates :introduction, length: { maximum: 200 }
 
@@ -16,17 +17,5 @@ class User < ApplicationRecord
     return if password =~ PASSWORD_REGEXP
 
     errors.add :password, I18n.t('activerecord.errors.models.user.attributes.password.blank')
-  end
-
-
-  def update_without_current_password(params, *options)
-    if params[:password].blank? && params[:password_confirmation].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
-    end
-
-    result = update_attributes(params, *options)
-    clean_up_passwords
-    result
   end
 end

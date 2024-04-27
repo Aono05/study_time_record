@@ -19,14 +19,5 @@ ja:
               after: 開始時間より後の時間を入力してください
         user:
           attributes:
-            email:
-              blank: "メールアドレスを入力してください。"
-              invalid: "メールアドレスが正しくありません。"
             password:
               blank: "パスワードは、12文字以上64文字以下で英字小文字、数字、記号を含めてください。"
-  errors:
-      messages:
-        not_saved:
-          one: "1つのエラーが発生したため %{resource} は保存されませんでした。"
-          other: "%{count} 個のエラーが発生したため %{resource} は保存されませんでした。"
-        blank: "を入力してください。"
