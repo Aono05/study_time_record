@@ -1,5 +1,5 @@
 .button-container {
-  text-align: left; /* 左寄せに変更 */
+  text-align: center;
 }
 
 .button {
@@ -15,4 +15,29 @@
 
 .button:hover {
   background-color: #45a049;
+}
+
+.outer-box {
+  display: inline-block; /* 文字の幅に合わせるためにインラインブロックに設定 */
+  border: 2px solid #ccc; /* 外側の枠線 */
+  border-radius: 5px;
+}
+
+.message-container {
+  text-align: center; /* 中央揃え */
+}
+
+.message-box {
+  border: 2px solid #ccc; /* 内側の枠線 */
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #e0f2f1; /* 水色の背景 */
+}
+
+.smaller {
+  font-size: 20px; /* 小さなサイズに変更 */
+}
+
+.underline {
+  text-decoration: underline; /* 下線を引く */
 }
