@@ -7,7 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
   validates :email, presence: true
-  validates :password, presence: true, on: :create
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
   validate :password_complexity
   validates :introduction, length: { maximum: 200 }
 
@@ -20,13 +21,18 @@ class User < ApplicationRecord
 
 
   def update_without_current_password(params, *options)
-    if params[:password].blank? && params[:password_confirmation].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
-    end
-
-    result = update_attributes(params, *options)
+    delete_password_params(params)
     clean_up_passwords
-    result
+    update_attributes(params, *options)
+  end
+
+  private
+
+  def delete_password_params(params)
+    return if params[:password].present?
+    return if params[:password_confirmation].present?
+
+    params.delete(:password)
+    params.delete(:password_confirmation)
   end
 end
