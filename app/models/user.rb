@@ -3,8 +3,7 @@ class User < ApplicationRecord
 
   has_many :cheer_messages, dependent: :destroy
   has_many :study_times, dependent: :destroy
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable
 
   validates :email, presence: true
   validates :password, presence: true
@@ -15,10 +14,10 @@ class User < ApplicationRecord
   def password_complexity
     return if password.blank?
     return if password =~ PASSWORD_REGEXP
+    return if password == password_confirmation
 
     errors.add :password, I18n.t('activerecord.errors.models.user.attributes.password.blank')
   end
-
 
   def update_without_current_password(params, *options)
     delete_password_params(params)
