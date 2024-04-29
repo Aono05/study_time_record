@@ -1,15 +1,23 @@
-<%= form_with model: @user, url: profile_path, local: true do |f| %>
+<div class="container">
+  <%= form_with model: @user, url: profile_path, local: true, class: "my-form" do |f| %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email, class: 'form-control mb-3' %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control', placeholder: 'メールアドレスを入力してください' %>
+    </div>
 
-  <%= f.label :"名前" %>
-  <%= f.text_field :name, class: 'form-control mb-3' %>
+    <div class="form-group">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: 'form-control', placeholder: '名前を入力してください' %>
+    </div>
 
-  <%= f.label :"プロフィール" %>
-  <%= f.text_field :introduction, class: 'form-control mb-3' %>
+    <div class="form-group">
+      <%= f.label :introduction, "プロフィール" %>
+      <%= f.text_field :introduction, class: 'form-control', placeholder: '自己紹介を入力してください' %>
+    </div>
 
-  <%= f.submit "更新", class: "btn btn-primary"%>
-<%end%>
+    <%= f.submit "更新", class: "btn btn-primary btn-block" %>
+  <% end %>
 
-<%= link_to '一覧に戻る', study_times_path %>
+  <%= link_to '一覧に戻る', study_times_path, class: "btn btn-secondary mt-3" %>
+</div>
