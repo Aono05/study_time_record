@@ -22,9 +22,9 @@
 <table class="center-table">
   <thead>
     <tr>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Duration</th>
+      <th>開始時間</th>
+      <th>終了時間</th>
+      <th>勉強合計時間</th>
       <th>Memo</th>
       <th colspan="3"></th>
     </tr>
@@ -37,9 +37,9 @@
         <td><%= l(study_time.ended_at) %></td>
         <td><%= study_time.duration %></td>
         <td><%= study_time.memo %></td>
-        <td><%= link_to 'Show', study_time %></td>
-        <td><%= link_to 'Edit', edit_study_time_path(study_time) %></td>
-        <td><%= link_to 'Destroy', study_time, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '詳細', study_time %></td>
+        <td><%= link_to '編集', edit_study_time_path(study_time) %></td>
+        <td><%= link_to '削除', study_time, method: :delete, data: { confirm: '本当に削除していいですか?' } %></td>
       </tr>
     <% end %>
   </tbody>
