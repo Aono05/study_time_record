@@ -4,3 +4,8 @@
 2024-04-30 05:46:14.058 JST [55296] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
 2024-04-30 05:46:14.064 JST [55297] LOG:  database system was shut down at 2024-01-10 06:22:29 JST
 2024-04-30 05:46:14.067 JST [55296] LOG:  database system is ready to accept connections
+2024-04-30 05:48:41.255 JST [55296] LOG:  received fast shutdown request
+2024-04-30 05:48:41.255 JST [55296] LOG:  aborting any active transactions
+2024-04-30 05:48:41.257 JST [55296] LOG:  background worker "logical replication launcher" (PID 55303) exited with exit code 1
+2024-04-30 05:48:41.257 JST [55298] LOG:  shutting down
+2024-04-30 05:48:41.263 JST [55296] LOG:  database system is shut down

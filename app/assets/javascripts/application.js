@@ -16,4 +16,4 @@
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
-require("@fortawesome/fontawesome-free/js/all")
+console.log('Hello World from Webpacker')
