@@ -83,3 +83,5 @@ gem 'mini_magick'
 gem 'net-http'
 
 gem 'draper'
+
+gem 'font-awesome-rails'

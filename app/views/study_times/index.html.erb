@@ -1,5 +1,9 @@
 <div class="container">
-  <h1 class="centered bold">勉強時間記録アプリ</h1>
+  <h1 class="centered bold">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+      勉強時間記録アプリ
+    <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+  </h1>
 
   <div class="message-container">
     <div class="outer-box">
@@ -13,9 +17,18 @@
 
   <div class="centered">
     <h2> 名前： <%= current_user.name %> </h2>
-    <%= link_to "プロフィール", profile_path, class: "button profile-button" %><br>
-    <%= link_to "オリジナル応援メッセージ一覧", cheer_messages_path, class: "button cheer-button" %><br>
-    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button logout-button" %>
+
+    <%= link_to profile_path, class: "button profile-button", title: "プロフィールの詳細" do %>
+      <i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i>
+    <% end %>
+
+    <%= link_to cheer_messages_path, class: "button cheer-button", title: "オリジナル応援メッセージ一覧" do %>
+      <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+    <% end %>
+
+    <%= link_to destroy_user_session_path, method: :delete, class: "button logout-button", title: "ログアウト" do %>
+      <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+    <% end %>
   </div>
 
   <%= column_chart @total_study_time_indexed_by_date, xtitle: "日付", ytitle: "勉強時間" %>
@@ -38,9 +51,21 @@
           <td><%= l(study_time.ended_at) %></td>
           <td><%= study_time.duration %></td>
           <td><%= study_time.memo %></td>
-          <td><%= link_to '詳細', study_time %></td>
-          <td><%= link_to '編集', edit_study_time_path(study_time) %></td>
-          <td><%= link_to '削除', study_time, method: :delete, data: { confirm: '本当に削除していいですか?' } %></td>
+          <td>
+            <%= link_to study_time, title: "詳細" do %>
+              <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_study_time_path(study_time), title: "編集" do %>
+              <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to study_time, method: :delete, data: { confirm: '本当に削除していいですか?' }, class: "btn btn-danger text-white", title: "削除" do %>
+              <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

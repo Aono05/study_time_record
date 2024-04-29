@@ -1,5 +1,7 @@
 {
   "name": "study_time_record",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2"
+  }
 }
