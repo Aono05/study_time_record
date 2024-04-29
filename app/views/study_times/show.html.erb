@@ -1,11 +1,17 @@
-<h1>勉強時間の詳細情報</h1>
+<div class="container">
+  <h1 class="my-4">勉強時間の詳細情報</h1>
 
-<p>開始時間：<%= l(@study_time.started_at) %></p>
-<p>終了時間：<%= l(@study_time.ended_at) %></p>
-<p>合計時間[分]：<%= @study_time.duration %></p>
-<p>Memo：<%= @study_time.memo %></p>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">開始時間：<%= l(@study_time.started_at) %></p>
+      <p class="card-text">終了時間：<%= l(@study_time.ended_at) %></p>
+      <p class="card-text">合計時間[分]：<%= @study_time.duration %></p>
+      <p class="card-text">Memo：<%= @study_time.memo %></p>
+    </div>
+  </div>
 
-<br>
-
-<%= link_to '編集', edit_study_time_path(@study_time) %> |
-<%= link_to '一覧に戻る', study_times_path %>
+  <div class="my-4">
+    <%= link_to '編集', edit_study_time_path(@study_time), class: "btn btn-primary mr-2" %> |
+    <%= link_to '一覧に戻る', study_times_path, class: "btn btn-secondary" %>
+  </div>
+</div>
