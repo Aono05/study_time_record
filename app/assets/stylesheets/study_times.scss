@@ -1,3 +1,24 @@
+/* スタイルの追加 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h4 {
+  color: #333;
+}
+
 .centered {
   text-align: center;
 }
@@ -6,70 +27,53 @@
   font-weight: bold;
 }
 
-.center-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.outer-box {
-  display: inline-block; /* 文字の幅に合わせるためにインラインブロックに設定 */
-  justify-content: center; /* 横方向のセンター配置 */
-  align-items: center; /* 縦方向のセンター配置 */
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  width: fit-content; /* テキストの幅に合わせる */
-  padding: 10px; /* 応援メッセージと枠の間のスペース */
-}
-
-.message-container {
-  text-align: center; /* 中央揃え */
-}
-
-.message-box {
-  border: 2px solid #ccc; /* 内側の枠線 */
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #e0f2f1; /* 水色の背景 */
-}
-
-.smaller {
-  font-size: 20px; /* 小さなサイズに変更 */
-}
-
 .underline {
-  text-decoration: underline; /* 下線を引く */
+  text-decoration: underline;
 }
 
-.profile-button {
-  background-color: #17bbe0; /* プロフィールボタンの色 */
-}
-
-.cheer-button {
-  background-color: #0088ff; /* オリジナル応援メッセージ一覧ボタンの色 */
-}
-
-.logout-button {
-  background-color: #666861; /* ログアウトボタンの色 */
-}
-
-.study-time-button {
-  background-color: #1a46c9; /* 勉強時間記録ボタンの色 */
-}
-
-.ranking-button {
-  background-color: #2849ce; /* 週間勉強時間ランキングボタンの色 */
-}
-
-/* ボタンの共通スタイル */
 .button {
   display: inline-block;
   padding: 10px 20px;
-  color: white;
+  background-color: #007bff;
+  color: #fff;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .button:hover {
-  opacity: 0.8; /* ホバー時の透明度 */
+  background-color: #0056b3;
+}
+
+.center-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.center-table th, .center-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.center-table th {
+  background-color: #f2f2f2;
+}
+
+.center-table td {
+  background-color: #fff;
+}
+
+.table-buttons a {
+  display: block;
+  margin-top: 5px;
+}
+
+.message-box {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
 }
