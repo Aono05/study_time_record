@@ -16,3 +16,4 @@
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
+console.log('Hello World from Webpacker')

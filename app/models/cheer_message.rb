@@ -8,7 +8,7 @@ class CheerMessage < ApplicationRecord
     if image.present?
       image.url
     else
-      "/assets/#{DEFAULT_IMAGE_NAME}"
+      default_image_path
     end
   end
 
@@ -18,6 +18,12 @@ class CheerMessage < ApplicationRecord
     else
       "画像なし"
     end
+  end
+
+  private
+
+  def default_image_path
+    ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
   end
 
   class << self
