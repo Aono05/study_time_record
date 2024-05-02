@@ -59,7 +59,7 @@ class StudyTime < ApplicationRecord
     end
 
     def total_duration_per_day(user)
-      group("DATE_TRUNC('day', started_at)").where(user: user).sum(calculate_duration)
+      group("to_char(started_at, 'YYYY-MM-DD')").where(user: user).sum(calculate_duration)
     end
 
     def where_by_duration(started_at, ended_at)
