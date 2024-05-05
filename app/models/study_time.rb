@@ -59,7 +59,11 @@ class StudyTime < ApplicationRecord
     end
 
     def total_duration_per_day(user)
-      group("DATE(started_at)").where(user: user).sum(calculate_duration)
+      study_times = StudyTime.where(user_id: user.id)
+      grouped_times = study_times.group_by { |time| time.started_at.to_date }
+      totals_per_day = grouped_times.transform_values do |times|
+        times.sum { |time| time.duration }
+      end
     end
 
     def where_by_duration(started_at, ended_at)
@@ -68,8 +72,9 @@ class StudyTime < ApplicationRecord
 
     private
 
-    def calculate_duration
-      "EXTRACT(epoch FROM ended_at) - EXTRACT(epoch FROM started_at) / 60"
+    def calculate_duration(user)
+      study_times = StudyTime.where(user_id: user.id)
+      duration_in_minutes = study_times.sum { |time| (time.ended_at - time.started_at) / 60 }
     end
   end
 end
