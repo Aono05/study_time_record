@@ -69,7 +69,7 @@ class StudyTime < ApplicationRecord
     private
 
     def calculate_duration
-      "(strftime('%s', ended_at) - strftime('%s', started_at)) / 60"
+      "EXTRACT(epoch FROM ended_at) - EXTRACT(epoch FROM started_at) / 60"
     end
   end
 end
