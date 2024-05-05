@@ -45,15 +45,17 @@ class StudyTime < ApplicationRecord
       consecutive_days
     end
 
-
     def max_consecutive_days_for_user(user)
       consecutive_days = 0
       max_consecutive_days = 0
+      calculated_dates = Set.new
       consecutive_calculated_on = Time.current.to_date
 
-      # TODO: パフォーマンスに懸念があるため改善する
       where(user_id: user.id).order(started_at: :desc).each do |study_time|
         study_started_on = study_time.started_at.to_date
+
+        # 同じ日付がすでに計算されている場合はスキップ
+        next if calculated_dates.include?(study_started_on)
 
         if study_time.before_started_on?(consecutive_calculated_on)
           consecutive_days += 1
@@ -63,6 +65,7 @@ class StudyTime < ApplicationRecord
 
         max_consecutive_days = [max_consecutive_days, consecutive_days].max
         consecutive_calculated_on = study_started_on
+        calculated_dates.add(study_started_on)
       end
 
       max_consecutive_days
