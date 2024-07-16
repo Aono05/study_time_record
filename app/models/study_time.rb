@@ -20,6 +20,10 @@ class StudyTime < ApplicationRecord
       where(user: user).sum(&:duration)
     end
 
+    def sorted_total_duration_per_day(user)
+      total_duration_per_day(user).sort_by { |date, _| date }
+    end
+
     def calculate_consecutive_days(user)
       consecutive_days = 0
       calculated_dates = Set.new
@@ -73,9 +77,11 @@ class StudyTime < ApplicationRecord
 
     def total_duration_per_day(user)
       study_times = StudyTime.where(user_id: user.id)
-      grouped_times = study_times.group_by { |time| time.started_at.to_date }
-      totals_per_day = grouped_times.transform_values do |times|
-        times.sum { |time| time.duration }
+      grouped_times = study_times.group_by do |time|
+        time.started_at.to_date
+      end
+      grouped_times.transform_values do |times|
+        times.sum(&:duration)
       end
     end
 
@@ -86,8 +92,9 @@ class StudyTime < ApplicationRecord
     private
 
     def calculate_duration(user)
-      study_times = StudyTime.where(user_id: user.id)
-      duration_in_minutes = study_times.sum { |time| (time.ended_at - time.started_at) / 60 }
+      where(user_id: user.id).sum do |time|
+        (time.ended_at - time.started_at) / 60
+      end
     end
   end
 end
