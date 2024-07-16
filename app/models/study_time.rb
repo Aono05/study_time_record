@@ -20,6 +20,10 @@ class StudyTime < ApplicationRecord
       where(user: user).sum(&:duration)
     end
 
+    def sorted_total_duration_per_day(user)
+      total_duration_per_day(user).sort_by { |date, _| date }
+    end
+
     def calculate_consecutive_days(user)
       consecutive_days = 0
       consecutive_calculated_on = Time.current.to_date
