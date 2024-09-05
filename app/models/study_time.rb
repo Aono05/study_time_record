@@ -66,8 +66,10 @@ class StudyTime < ApplicationRecord
 
     private
 
-    def calculate_duration
-      "EXTRACT(EPOCH FROM (ended_at - started_at)) / 60"
+    def calculate_duration(user)
+      where(user_id: user.id).sum do |time|
+        (time.ended_at - time.started_at) / 60
+      end
     end
   end
 end
