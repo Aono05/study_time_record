@@ -272,11 +272,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
-<<<<<<< HEAD
     shoulda-matchers (6.2.0)
       activesupport (>= 5.2.0)
-=======
->>>>>>> production
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)

@@ -26,10 +26,6 @@ class CheerMessage < ApplicationRecord
     ActionController::Base.helpers.image_path(DEFAULT_IMAGE_NAME)
   end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> production
   class << self
     def random(cheer_messages)
       if cheer_messages.present?
