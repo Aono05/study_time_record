@@ -41,6 +41,13 @@
 yarn-debug.log*
 .yarn-integrity
 
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
 # 非公開
 credentials.yml.enc
 database.yml
