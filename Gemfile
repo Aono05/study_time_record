@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.7'
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
+gem 'rails', '~> 6.1.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -61,6 +61,10 @@ group :test do
   # gem 'chromedriver-helper'
 end
 
+group :production do
+  gem 'unicorn', '5.7.0'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -80,6 +84,12 @@ gem 'carrierwave'
 
 gem 'mini_magick'
 
+gem 'webpacker', '~> 5.0'
+
 gem 'net-http'
 
+gem 'pg', '>= 1.5.4'
+
 gem 'draper'
+
+gem 'font-awesome-rails'
