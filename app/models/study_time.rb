@@ -20,30 +20,16 @@ class StudyTime < ApplicationRecord
       where(user: user).sum(&:duration)
     end
 
-    def sorted_total_duration_per_day(user)
-      total_duration_per_day(user).sort_by { |date, _| date }
-    end
-
     def calculate_consecutive_days(user)
       consecutive_days = 0
-      calculated_dates = Set.new
       consecutive_calculated_on = Time.current.to_date
 
-      where(user_id: user.id).order(started_at: :desc).each do |study_time|
-        date = study_time.started_at.to_date
+      where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
 
-        # 同じ日付がすでに計算されている場合はスキップ
-        next if calculated_dates.include?(date)
+        break if consecutive_calculated_on != study_time.started_at.to_date
 
-        # 同じ日付が計算されていない場合は連続勉強日数を増やし、セットに追加
-        if consecutive_calculated_on == date
-          consecutive_days += 1
-          consecutive_calculated_on = consecutive_calculated_on.ago(1.day).to_date
-        else
-          break
-        end
-
-        calculated_dates.add(date)
+        consecutive_days += 1
+        consecutive_calculated_on = consecutive_calculated_on.ago(1.day).to_date
       end
 
       consecutive_days
@@ -52,14 +38,10 @@ class StudyTime < ApplicationRecord
     def max_consecutive_days_for_user(user)
       consecutive_days = 0
       max_consecutive_days = 0
-      calculated_dates = Set.new
       consecutive_calculated_on = Time.current.to_date
 
-      where(user_id: user.id).order(started_at: :desc).each do |study_time|
+      where(user_id: user.id).order(started_at: :desc).find_each do |study_time|
         study_started_on = study_time.started_at.to_date
-
-        # 同じ日付がすでに計算されている場合はスキップ
-        next if calculated_dates.include?(study_started_on)
 
         if study_time.before_started_on?(consecutive_calculated_on)
           consecutive_days += 1
@@ -69,18 +51,13 @@ class StudyTime < ApplicationRecord
 
         max_consecutive_days = [max_consecutive_days, consecutive_days].max
         consecutive_calculated_on = study_started_on
-        calculated_dates.add(study_started_on)
       end
 
       max_consecutive_days
     end
 
     def total_duration_per_day(user)
-      study_times = StudyTime.where(user_id: user.id)
-      grouped_times = study_times.group_by { |time| time.started_at.to_date }
-      grouped_times.transform_values do |times|
-        times.sum(&:duration)
-      end
+      group("date(started_at)").where(user: user).sum(calculate_duration)
     end
 
     def where_by_duration(started_at, ended_at)
@@ -89,15 +66,8 @@ class StudyTime < ApplicationRecord
 
     private
 
-<<<<<<< HEAD
-    def calculate_duration(user)
-      where(user_id: user.id).sum do |time|
-        (time.ended_at - time.started_at) / 60
-      end
-=======
     def calculate_duration
       "EXTRACT(EPOCH FROM (ended_at - started_at)) / 60"
->>>>>>> production
     end
   end
 end

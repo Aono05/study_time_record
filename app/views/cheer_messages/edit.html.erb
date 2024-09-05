@@ -1,30 +1,28 @@
-<div class="container">
-  <h1 class="heading">応援メッセージの編集</h1>
+<h1>応援メッセージの編集</h1>
 
-  <%= form_with(model: @cheer_message, local: true, html: { class: "form" }) do |form| %>
-    <div class="form-group">
-      <%= form.label :content, "応援メッセージ：", class: "label" %>
-      <%= form.text_area :content, rows: 4, class: "text-area" %>
-    </div>
+<%= form_with(model: @cheer_message, local: true) do |form| %>
+  <div>
+    <%= form.label :content, "応援メッセージ：" %>
+    <%= form.text_area :content, rows: 4 %>
+  </div>
 
-    <div class="form-group">
-      <% if @cheer_message.image? %>
-        <div class="image-preview">
-          <p>現在の画像：</p>
-          <%= image_tag @cheer_message.image.url, class: "image" %>
-        </div>
-      <% end %>
-
-      <div class="image-upload">
-        <%= form.label :image, "新しい画像をアップロード：", class: "label" %>
-        <%= form.file_field :image, class: "file-input" %>
+  <div>
+    <% if @cheer_message.image? %>
+      <div>
+        <p>現在の画像：</p>
+        <%= image_tag @cheer_message.image.url %>
       </div>
-    </div>
+    <% end %>
 
-    <div class="form-group">
-      <%= form.submit "更新する", class: "submit-button" %>
+    <div>
+      <%= form.label :image, "新しい画像をアップロード：" %>
+      <%= form.file_field :image %>
     </div>
-  <% end %>
+  </div>
 
-  <%= link_to '一覧に戻る', cheer_messages_path, class: "link" %>
-</div>
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', cheer_messages_path %>

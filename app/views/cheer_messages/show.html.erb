@@ -1,15 +1,12 @@
-<div class="container">
-  <h1>応援メッセージの詳細</h1>
+<h1>応援メッセージの詳細</h1>
 
-  <div class="message">
-    <p>応援メッセージ：<%= @cheer_message.content %></p>
-    <% if @cheer_message.image? %>
-      <%= image_tag @cheer_message.image.url %>
-    <% end %>
-  </div>
+<p>応援メッセージ：<%= @cheer_message.content %></p>
 
-  <div class="button-container">
-    <%= link_to '編集', edit_cheer_message_path(@cheer_message), class: "button" %>
-    <%= link_to '一覧に戻る', cheer_messages_path, class: "button" %>
-  </div>
-</div>
+<% if @cheer_message.image? %>
+  <%= image_tag @cheer_message.image.url %>
+<% end %>
+
+<br>
+
+<%= link_to '編集', edit_cheer_message_path(@cheer_message) %> |
+<%= link_to '一覧に戻る', cheer_messages_path %>

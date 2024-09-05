@@ -1,5 +1,4 @@
-<div class="container">
-  <h1 class="heading">新しい応援メッセージの作成</h1>
+  <h1>新しい応援メッセージの作成</h1>
 
   <% if flash[:alert].present? %>
     <div class="flash alert">
@@ -7,7 +6,7 @@
     </div>
   <% end %>
 
-  <%= form_with(model: @cheer_message, local: true, html: { class: "form" }) do |form| %>
+  <%= form_with(model: @cheer_message, local: true) do |form| %>
     <% if @cheer_message.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@cheer_message.errors.count, "error") %> が発生しました。</h2>
@@ -20,20 +19,20 @@
       </div>
     <% end %>
 
-    <div class="form-group">
-      <%= form.label :応援メッセージ, class: "label" %>
-      <%= form.text_area :content, rows: 2, class: "text-area" %>
+    <div>
+      <%= form.label :応援メッセージ %>：
+      <%= form.text_area :content, row: 2 %>
+    </div>
+    <div>
+
+    <div class="field">
+      <%= form.label :応援画像 %>
+      <%= form.file_field :image %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :応援画像, class: "label" %>
-      <%= form.file_field :image, class: "file-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.submit "登録する", class: "submit-button" %>
+    <div>
+      <%= form.submit "登録する" %>
     </div>
   <% end %>
 
-  <%= link_to '一覧に戻る', cheer_messages_path, class: "link" %>
-</div>
+  <%= link_to '一覧に戻る', cheer_messages_path %>

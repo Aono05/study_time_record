@@ -1,43 +1,26 @@
-<div class="container">
-  <table class="table">
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cheer_messages.each do |cheer_message| %>
       <tr>
-        <th>内容</th>
-        <th>画像</th>
-        <th>詳細</th>
-        <th>編集</th>
-        <th>削除</th>
+        <td><%= cheer_message.content %></td>
+        <td><%= cheer_message.uploaded_image_status %></td>
+        <td><%= link_to '詳細', cheer_message %></td>
+        <td><%= link_to '編集', edit_cheer_message_path(cheer_message) %></td>
+        <td><%= link_to '削除', cheer_message, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @cheer_messages.each do |cheer_message| %>
-        <tr>
-          <td><%= cheer_message.content %></td>
-          <td><%= cheer_message.decorate.uploaded_image_status %></td>
-          <td>
-            <%= link_to cheer_message, class: "button" do %>
-              <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to edit_cheer_message_path(cheer_message), class: "button" do %>
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to cheer_message, method: :delete, data: { confirm: '本当に削除しますか?' }, class: "button" do %>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<br>
+<h3>応援メッセージを作成する</h3>
+<%= link_to '新規応援メッセージ作成', new_cheer_message_path %>
+<br>
 
-  <div class="button-container">
-    <%= link_to '新規応援メッセージ作成', new_cheer_message_path, class: "button" %>
-  </div>
-
-  <%= link_to("TOP", "/study_times/index", class: "button") %>
-</div>
+<%= link_to("TOP", "/study_times/index")%>

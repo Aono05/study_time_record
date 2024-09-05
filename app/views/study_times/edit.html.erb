@@ -1,38 +1,36 @@
-<div class="container">
-  <h1 class="my-4">勉強時間の編集</h1>
+<h1>勉強時間の編集</h1>
 
-  <%= form_with(model: @study_time, local: true, class: "my-form") do |form| %>
-    <% if @study_time.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h4><%= pluralize(@study_time.errors.count, "error") %> が発生しました。</h4>
+<%= form_with(model: @study_time, local: true) do |form| %>
+  <% if @study_time.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@study_time.errors.count, "error") %> が発生しました。</h2>
 
-        <ul>
-          <% @study_time.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="form-group">
-      <%= form.label :started_at, "開始時間" %>：
-      <%= form.datetime_local_field :started_at, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :ended_at, "終了時間" %>：
-      <%= form.datetime_local_field :ended_at, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :memo, "Memo" %>：
-      <%= form.text_area :memo, rows: 4, class: "form-control" %>
-    </div>
-
-    <div>
-      <%= form.submit "更新する", class: "btn btn-primary" %>
+      <ul>
+        <% @study_time.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <%= link_to '一覧に戻る', study_times_path, class: "btn btn-secondary mt-3" %>
-</div>
+  <div>
+    <%= form.label :started_at %>：
+    <%= form.datetime_local_field :started_at %>
+  </div>
+
+  <div>
+    <%= form.label :ended_at %>：
+    <%= form.datetime_local_field :ended_at %>
+  </div>
+
+  <div>
+    <%= form.label :memo %>：
+    <%= form.text_area :memo, row: 4 %>
+  </div>
+
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= link_to '一覧に戻る', study_times_path %>
