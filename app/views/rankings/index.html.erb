@@ -1,22 +1,28 @@
-<h1>週間合計勉強時間ランキング</h1>
+<div class="container">
+  <h1 class="my-4">週間合計勉強時間ランキング</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>User_id</th>
-      <th>1週間の合計勉強時間 (分)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @total_week_study_time_ranking.each.with_index(1) do |ranking, index| %>
-      <tr>
-        <td><%= index %></td>
-        <td><%= ranking.user_id %></td>
-        <td><%= ranking.total_duration %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>順位</th>
+          <th>User ID</th>
+          <th>名前</th>
+          <th>1週間の合計勉強時間 (分)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @total_week_study_time_ranking.each.with_index(1) do |ranking, index| %>
+          <tr>
+            <td><%= index %></td>
+            <td><%= ranking.user_id %></td>
+            <td><%= ranking.user.name %></td>
+            <td><%= ranking.total_duration %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to("勉強時間一覧", "/study_times/index")%>
+  <%= link_to("勉強時間一覧", study_times_path, class: "btn btn-primary mt-3") %>
+</div>
