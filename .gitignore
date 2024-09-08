@@ -49,9 +49,9 @@ yarn-debug.log*
 .yarn-integrity
 
 # 非公開
-credentials.yml.enc
-database.yml
+/credentials.yml.enc
+/database.yml
 /.env
 /public/uploads
 /vendor/bundle
-render.yaml
+/render.yaml
