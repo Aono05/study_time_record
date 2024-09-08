@@ -49,9 +49,18 @@ yarn-debug.log*
 .yarn-integrity
 
 # 非公開
-/config/credentials.yml.enc
-/config/database.yml
-/.env
-/public/uploads
-/vendor/bundle
+# Credentials
+config/credentials.yml.enc
+
+# Database configuration
+config/database.yml
+
+# Secrets
+secrets.yml
+
+# Environment variables
+.env
+.env.production
+
+# Infrastructure settings
 render.yaml
