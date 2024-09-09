@@ -52,9 +52,6 @@ yarn-debug.log*
 # Credentials
 config/credentials.yml.enc
 
-# Database configuration
-config/database.yml
-
 # Secrets
 secrets.yml
 
