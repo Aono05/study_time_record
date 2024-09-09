@@ -3,6 +3,7 @@
   padding: 0px;
   text-decoration: none;
 }
+
 .box {
   width: 350px;
   height: 450px;
@@ -70,14 +71,16 @@ h1 {
   border-style: none;
   width: 100%;
   height: 31px;
-  background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+  background-color: #add8e6; /* 薄い青 */
+  color: black;
   border-radius: 3px;
   border: 1px #a88734 solid;
 }
 
 .box-login input[type="submit"]:hover {
   cursor: pointer;
-  background: #f0c14b;
+  background-color: #90c3e6; /* ホバー時の色 */
+  color: black; /* ホバー時も文字色を黒に */
 }
 
 .legal-text {
@@ -111,11 +114,33 @@ h1 {
   color: #111;
   line-height: 31px;
   text-align: center;
-  background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+  background-color: #d3d3d3; /* グレー */
   border-radius: 3px;
   border: 1px #a2a6ac solid;
 }
 
 .box-newusr a:hover {
-  background: #e7e9ec;
+  background-color: #bdbdbd; /* ホバー時の色 */
+}
+
+body {
+  background: url('/assets/study_desk.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #f0f8ff; /* 背景色の変更 */
+}
+
+.box-inner {
+  background-color: rgba(255, 255, 255, 0.8); /* 透明感のある背景 */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 200px; /* ログインボタンと同じ大きさに調整 */
+  width: 100%;
 }
