@@ -17,8 +17,3 @@
 
 //= require chartkick
 //= require Chart.bundle
-<<<<<<< HEAD
-=======
-
-console.log('Hello World from Webpacker')
->>>>>>> production
